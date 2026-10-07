@@ -508,9 +508,22 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
 }
 
 .service-card {
+  min-width: 0;
   padding: 38px;
   border: 1px solid #dce7e5;
   background: #fafbf9;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+@media (max-width: 800px) {
+  .service-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .service-card {
+    padding: 24px;
+  }
 }
 
 .service-image {
