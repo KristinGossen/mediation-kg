@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="Privatmediation für Paare, Familien und andere private Konfliktsituationen – vertraulich, persönlich und mit Blick auf eine gemeinsame Lösung." />
+    <title>Privatmediation | Kristin Goßen</title>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="/" aria-label="Mediation Kristin Goßen – Startseite">
+        <img src="/mediation-logo.png" alt="Mediation KG – Faire Konfliktlösung" />
+      </a>
+      <a class="back-link" href="/#privatmediation">← Zur Startseite</a>
+    </header>
+    <main>
+      <h1>Privatmediation</h1>
+      <img
+        class="service-image"
+        src="/privatmediation-gemeinsam-umsetzen.png"
+        alt="Illustration einer Familie, die gemeinsam Lösungen für private Konflikte umsetzt."
+        width="1536"
+        height="1024"
+        fetchpriority="high"
+        decoding="async"
+      />
+      <div class="description">
+        <h2>Wenn Beziehungen durch Konflikte belastet werden.</h2>
+        <p>
+          Für Paare, Familien, Nachbarn und andere private Konfliktsituationen –
+          vertraulich, persönlich und mit Blick auf eine gemeinsame Lösung.
+        </p>
+        <a class="consultation" href="tel:+4915161235537">Unverbindliches Erstgespräch</a>
+        <div class="consultation-text">
+          <p>Zufriedenheit ist nicht selbstverständlich und oft schwer umsetzbar.</p>
+          <p>
+            Wir begleiten Sie in Gesprächen und führen Sie zu Ihren gemeinsamen Lösungen,
+            für eine leichtere Zukunft.
+          </p>
+          <p>
+            Wir freuen uns auf Ihren Anruf und nehmen uns genügend Zeit für Ihre Anliegen
+            und danken Ihnen für Ihr Vertrauen.
+          </p>
+        </div>
+        <section class="mediation-process" aria-labelledby="process-heading">
+          <h2 id="process-heading">Ablauf in 5 Phasen:</h2>
+          <p class="process-principles">Grundlegende Prinzipien werden vereinbart:</p>
+          <ol class="mediation-phases">
+            <li>1. Anliegen schildern und Konfliktthemen sammeln</li>
+            <li>2. Konfliktthemen benennen</li>
+            <li>3. Aufdecken der Hintergründe</li>
+            <li>4. Lösungsentwicklung</li>
+            <li>5. Lösungsvereinbarung</li>
+          </ol>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
+
+<style>
+  @font-face {
+    font-family: "Allura";
+    src: url("/fonts/Allura-Regular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Cormorant Garamond";
+    src: url("/fonts/CormorantGaramond.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 300 700;
+    font-display: swap;
+  }
+
+  :global(*) {
+    box-sizing: border-box;
+  }
+
+  :global(body) {
+    margin: 0;
+    background: #f7f6f2;
+    color: #16343d;
+    font-family: "Times New Roman", Times, serif;
+    line-height: 1.6;
+  }
+
+  :global(a) {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 18px 6%;
+    border-bottom: 1px solid rgba(22, 52, 61, 0.1);
+  }
+
+  .brand {
+    width: min(340px, 100%);
+  }
+
+  .brand img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: brightness(0.78) contrast(1.3) saturate(1.1);
+  }
+
+  .back-link {
+    color: #168c91;
+  }
+
+  main {
+    max-width: 1376px;
+    margin: 0 auto;
+    padding: 40px 24px 72px;
+  }
+
+  h1 {
+    margin: 0 0 30px;
+    text-align: center;
+    font-family: "Cormorant Garamond", "Times New Roman", serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 400;
+    letter-spacing: -0.025em;
+  }
+
+  .service-image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .description {
+    max-width: 760px;
+    margin: 40px auto 0;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    line-height: 1.25;
+    font-weight: 500;
+  }
+
+  .consultation {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 14px 24px;
+    border: 1px solid #e5b62f;
+    border-radius: 999px;
+    background: #e5b62f;
+  }
+
+  .consultation-text {
+    margin-top: 60px;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .consultation-text p {
+    margin: 0;
+  }
+
+  .consultation-text p + p {
+    margin-top: 1lh;
+  }
+
+  .consultation-text p:last-child {
+    margin-top: 2lh;
+  }
+
+  .mediation-process {
+    margin-top: 36px;
+  }
+
+  #process-heading {
+    color: #168c91;
+    font-family: "Allura", cursive;
+    font-size: clamp(2.2rem, 4.4vw, 3rem);
+    font-weight: 700;
+  }
+
+  .process-principles {
+    margin: 24px 0 0;
+  }
+
+  .mediation-phases {
+    color: #168c91;
+    display: grid;
+    gap: 1lh;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+</style>

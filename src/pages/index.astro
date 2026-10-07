@@ -1,138 +1,580 @@
+---
+const navItems = [
+  { label: "Privatmediation", href: "/privatmediation/" },
+  { label: "Wirtschaftsmediation", href: "/wirtschaftsmediation/" },
+  { label: "Blog", href: "/blog/" },
+  { label: "Kontakt", href: "/kontakt/" },
+];
+const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 C80 156 44 120 2 100 C44 80 80 44 100 2 Z";
+---
+
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>MEDIATION Kristin Gossen</title>
+    <meta
+      name="description"
+      content="Professionelle Mediation für Privatpersonen und Unternehmen – vertraulich, neutral und lösungsorientiert."
+    />
+    <title>MEDIATION Kristin Gossen | Faire Konfliktlösung</title>
   </head>
-
-  <body>
-    <header>
-      <div class="logo">
-        <span>MEDIATION</span>
-        <small>Faire Konfliktlösung</small>
-      </div>
-
-      <nav>
-        <a href="#">Privatmediation</a>
-        <a href="#">Unternehmensmediation</a>
-        <a href="#">Über mich</a>
-        <a href="#">Fachwissen</a>
-        <a href="#">Kontakt</a>
+   <body>
+    <header class="site-header">
+      <a class="brand" href="/">
+      <img class="brand-logo" src="/mediation-logo.png" alt="Mediation KG – Faire Konfliktlösung" />
+      </a>
+      <a class="header-portrait" href="/kristin-gossen/" aria-label="Über Kristin Goßen">
+        <svg class="portrait-frame" viewBox="0 0 200 200" role="img" aria-label="Kristin Goßen">
+          <defs>
+            <clipPath id="portrait-clip" clipPathUnits="userSpaceOnUse">
+              <path d={portraitOutline} />
+            </clipPath>
+          </defs>
+          <image href="/Foto Medi.jpeg" width="200" height="200" preserveAspectRatio="xMidYMin slice" clip-path="url(#portrait-clip)" />
+          <path d={portraitOutline} fill="none" stroke="#168c91" stroke-width="2.5" stroke-linejoin="miter" />
+        </svg>
+      </a>
+      <nav class="main-nav" aria-label="Hauptnavigation">
+        {
+          navItems.map((item) => (
+            <a href={item.href}>{item.label}</a>
+          ))
+        }
+        <a class="about-header" href="/kristin-gossen/">Kristin Goßen</a>
       </nav>
     </header>
-
     <main>
-      <p class="eyebrow">MEDIATION · KLARHEIT · VERSTÄNDIGUNG</p>
+      <section class="hero">
+        <div class="hero-content">
+          <p class="hero-intro">Mediation = für jeden der bereit ist,<br />Stress zu bewältigen und Lebensqualität zu steigern.</p>
+          <p class="eyebrow hero-principles">VERTRAULICH · EIGENVERANTWORTLICH · UNPARTEIISCH · FREIWILLIG</p>
 
-      <h1>Konflikte verstehen.<br />Lösungen gemeinsam entwickeln.</h1>
+          <h1>
+            Konflikte klären:<br />
+            <span class="hero-resolution">Zuhören, verstehen, einsehen, lösen.</span>
+          </h1>
 
-      <p class="intro">
-        Professionelle Mediation für Privatpersonen und Unternehmen –
-        vertraulich, neutral und lösungsorientiert.
-      </p>
+          <div class="hero-actions">
+            <a class="button button-consultation" href="tel:+4915161235537">
+              Unverbindl. Erstgespräch
+            </a>
+          </div>
+          <p class="satisfaction-statement">Zufriedenheit ist ein Verdienst.</p>
+          <p class="mediation-benefits">
+            <strong class="mediation-emphasis">Mediation</strong><br />
+            ist freiwillig<br />
+            und verschwiegen<br />
+            bringt Verständigung<br />
+            macht handlungsfähig<br />
+            ist neutral und selbstbestimmt<br />
+            verschafft Klarheit und neue Sichtweisen<br />
+            <strong class="mediation-emphasis">fragt nicht nach einem Schuldigen</strong>
+          </p>
+          <p class="hero-text">
+            Ob im privaten Umfeld oder im Unternehmen: Mediation ermöglicht
+            strukturierte Gespräche auf Augenhöhe und schafft Raum für Lösungen,
+            die von allen Beteiligten getragen werden können.
+          </p>
+        </div>
 
-      <div class="buttons">
-        <a class="primary" href="#">Für Privatpersonen</a>
-        <a class="secondary" href="#">Für Unternehmen</a>
-      </div>
+      </section>
+       <section class="services">
+        <div class="section-intro">
+          <p class="eyebrow">Ein Anfang · Ein gemeinsames Ziel</p>
+          <h2>Konflikte dort lösen,<br />wo sie entstehen.</h2>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card" id="privatmediation">
+            <p class="service-label">Privatmediation</p>
+            <a href="/privatmediation/" aria-label="Privatmediation öffnen">
+              <img
+                class="service-image"
+                src="/privatmediation-gemeinsam-umsetzen.png"
+                alt="Illustration einer Familie, die gemeinsam Lösungen für private Konflikte umsetzt."
+                width="1536"
+                height="1024"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+            <h3>Wenn Beziehungen durch Konflikte belastet werden.</h3>
+            <p>
+              Für Paare, Familien, Nachbarn und andere private Konfliktsituationen –
+              vertraulich, persönlich und mit Blick auf eine gemeinsame Lösung.
+            </p>
+            <a href="/privatmediation/">Mehr erfahren →</a>
+          </article>
+
+          <article class="service-card" id="wirtschaftsmediation">
+            <p class="service-label">Wirtschaftsmediation</p>
+            <a href="/wirtschaftsmediation/" aria-label="Wirtschaftsmediation öffnen">
+            <img
+              class="service-image"
+              src="/motiviertes-team.png"
+              alt="Illustration eines motivierten Teams, das in einem hellen Büro zusammenarbeitet."
+              width="1536"
+              height="1024"
+              loading="lazy"
+              decoding="async"
+            />
+            </a>
+            <h3>Wenn Zusammenarbeit wieder möglich werden soll.</h3>
+            <p>
+              Für Konflikte zwischen Mitarbeitenden, Teams oder Führungskräften –
+              professionell, strukturiert und auf Wunsch dokumentiert.
+            </p>
+            <a href="/wirtschaftsmediation/">Mehr erfahren →</a>
+          </article>
+        </div>
+      </section>
+       <section class="approach">
+        <div class="approach-heading">
+          <p class="eyebrow">Mediation Bedeutet:</p>
+          <h2>Nicht entscheiden,<br />wer Recht hat.</h2>
+          <h2 class="accent-heading">Sondern verstehen,<br />was es braucht.</h2>
+        </div>
+
+        <div class="approach-content">
+          <p class="approach-lead">
+            Konflikte entstehen dort, wo unterschiedliche Bedürfnisse,
+            Erwartungen und Perspektiven aufeinandertreffen.
+          </p>
+
+          <p>
+            Als Mediatorin begleite ich die Beteiligten dabei, wieder miteinander
+            ins Gespräch zu kommen, Interessen sichtbar zu machen und eigene,
+            tragfähige Lösungen zu entwickeln.
+          </p>
+
+        </div>
+      </section>
+       <section class="contact" id="kontakt">
+        <h2>Und manchmal beginnt eine Lösung<br />mit einem Gespräch.</h2>
+        <p>
+          In einem unverbindlichen Erstgespräch klären wir gemeinsam,
+          ob Mediation für Ihre Situation der passende Weg ist.
+        </p>
+        <a class="button button-primary" href="tel:+4915161235537">
+          Erstgespräch anfragen
+        </a>
+      </section>
     </main>
+
+    <footer>
+      <p>© 2026 MEDIATION KG · Faire Konfliktlösung</p>
+      <div>
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+      </div>
+    </footer>
   </body>
 </html>
-
 <style>
-  * {
+  @font-face {
+    font-family: "Cormorant Garamond";
+    src: url("/fonts/CormorantGaramond.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 300 700;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Allura";
+    src: url("/fonts/Allura-Regular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+  }
+
+  :global(*) {
     box-sizing: border-box;
   }
 
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f8f7f3;
-    color: #263438;
+  :global(html) {
+    scroll-behavior: smooth;
   }
 
-  header {
-    height: 110px;
-    padding: 0 7%;
+  :global(body) {
+    margin: 0;
+    background: #f7f8f5;
+    color: #16343d;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+  }
+
+  :global(a) {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .site-header {
+    min-height: 92px;
+    padding: 18px 6%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 184px;
+    align-items: center;
+    gap: 14px 24px;
+    background: rgba(247, 248, 245, 0.96);
+    border-bottom: 1px solid rgba(22, 52, 61, 0.1);
+  }
+
+  .brand {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    max-width: 340px;
+    min-width: 0;
+  }
+
+  .brand-name {
+    font-size: 1.35rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    background: linear-gradient(90deg, #173f5f, #168c91, #65a84b);
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .brand-subtitle {
+    margin-top: 2px;
+    color: #65a84b;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .main-nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    min-width: 0;
+    overflow-x: auto;
+    gap: 28px;
+    font-size: 0.88rem;
+    text-align: right;
+    padding-block: 6px;
   }
 
-  .logo {
-    display: flex;
-    flex-direction: column;
+  .main-nav a {
+    flex-shrink: 0;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
   }
 
-  .logo span {
-    font-size: 25px;
-    letter-spacing: 5px;
+  .main-nav a:hover {
+    opacity: 0.55;
   }
 
-  .logo small {
-    margin-top: 6px;
-    color: #258c91;
-    letter-spacing: 1.5px;
+  .header-contact {
+    padding: 11px 20px;
+    border: 1px solid #168c91;
+    border-radius: 999px;
+    color: #126e73;
+    font-size: 0.85rem;
+  }
+  .hero {
+  padding: 140px 8% 110px;
+  background: #f7f6f2;
+}
+
+.hero-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.hero-principles {
+  text-align: center;
+}
+
+.hero-intro {
+  position: relative;
+  top: -1lh;
+  margin: 0 0 12px;
+  text-align: center;
+  color: #168c91;
+  font-family: "Allura", cursive;
+  font-size: clamp(2rem, 3.2vw, 2.65rem);
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.eyebrow {
+  margin: 0 0 24px;
+  color: #168c91;
+  font-size: 0.82rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.hero-principles {
+  margin-bottom: clamp(48px, 5vw, 72px);
+}
+
+.hero h1 {
+  max-width: 100%;
+  margin: 0;
+  text-align: center;
+  color: #263438;
+  font-size: clamp(3rem, 6vw, 5.4rem);
+  line-height: 1.02;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+
+.hero-resolution {
+  font-size: clamp(1rem, 5vw, 5.4rem);
+  letter-spacing: -0.025em;
+  white-space: nowrap;
+}
+
+.hero-text {
+  max-width: 760px;
+  margin: 30px auto 0;
+  text-align: center;
+  color: #566164;
+  font-size: 1.2rem;
+  line-height: 1.7;
+}
+.mediation-benefits {
+  margin: 36px 0 0;
+  text-align: center;
+  color: #16343d;
+  font-size: 1.2rem;
+  line-height: 1.8;
+}
+
+.mediation-emphasis {
+  color: #e00000;
+  font-family: "Cormorant Garamond", "Times New Roman", serif;
+  font-size: 1.7em;
+  font-weight: 700;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: nowrap;
+  width: fit-content;
+  max-width: 100%;
+  overflow-x: auto;
+  padding-block: 2px;
+  gap: 14px;
+  margin: 38px auto 0;
+  text-align: center;
+}
+
+.hero-actions .button {
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: #168c91;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.hero-actions .button-consultation {
+  border-color: #e5b62f;
+  background: #e5b62f;
+  color: #16343d;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 24px;
+  border: 1px solid #168c91;
+  border-radius: 4px;
+  color: #168c91;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.button.primary {
+  background: #168c91;
+  color: #ffffff;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button.primary:hover {
+  opacity: 0.88;
+}
+.trust-row {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-top: 34px;
+  color: #566164;
+  font-size: 0.9rem;
+}
+
+.trust-row span {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.trust-row span::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #78b82a;
+}
+.satisfaction-statement {
+  margin: 36px 0 0;
+  text-align: center;
+  color: #168c91;
+  font-family: "Allura", cursive;
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.services {
+  padding: 90px 8%;
+  background: #ffffff;
+}
+
+.section-intro {
+  max-width: 760px;
+  margin-bottom: 55px;
+}
+
+.section-intro h2 {
+  margin: 14px 0 22px;
+  color: #263438;
+  font-size: clamp(2.3rem, 4vw, 4rem);
+  line-height: 1.08;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+}
+
+.section-intro > p:not(.eyebrow) {
+  margin: 0;
+  color: #566164;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.service-card {
+  padding: 38px;
+  border: 1px solid #dce7e5;
+  background: #fafbf9;
+}
+
+.service-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 0 24px;
+  border-radius: 8px;
+}
+
+.service-label {
+  margin: 0 0 16px;
+  color: #168c91;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.service-card h3 {
+  margin: 0 0 20px;
+  color: #263438;
+  font-size: 1.6rem;
+  line-height: 1.25;
+  font-weight: 500;
+}
+
+.service-card > p:not(.service-label) {
+  margin: 0 0 30px;
+  color: #566164;
+  line-height: 1.7;
+}
+
+.service-card a {
+  color: #168c91;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.approach,
+.contact,
+footer {
+  text-align: center;
+}
+
+.button-consultation {
+  border-radius: 999px;
+  font-family: Georgia, serif;
+}
+
+.brand-logo {
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+  display: block;
+  filter: brightness(0.78) contrast(1.3) saturate(1.1);
+}
+
+@media (max-width: 900px) {
+  .main-nav {
+    gap: 12px 20px;
+  }
+}
+.about-header {
+  width: 184px;
+  text-align: center;
+}
+.header-portrait {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+  width: 184px;
+  height: 184px;
+  display: grid;
+  place-items: center;
+}
+.portrait-frame {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .site-header {
+    grid-template-columns: minmax(0, 1fr) 132px;
+    column-gap: 16px;
   }
 
-  nav {
-    display: flex;
-    gap: 32px;
+  .header-portrait {
+    width: 132px;
+    height: 132px;
   }
 
-  nav a {
-    color: #263438;
-    text-decoration: none;
-    font-size: 14px;
+  .about-header {
+    width: 132px;
   }
 
-  main {
-    min-height: calc(100vh - 110px);
-    padding: 8% 12%;
-  }
+}
 
-  .eyebrow {
-    color: #258c91;
-    font-size: 13px;
-    letter-spacing: 3px;
-    margin-bottom: 28px;
-  }
-
-  h1 {
-    max-width: 850px;
-    font-size: 64px;
-    line-height: 1.08;
-    font-weight: 300;
-    letter-spacing: -1px;
-    margin: 0 0 30px;
-  }
-
-  .intro {
-    max-width: 650px;
-    font-size: 20px;
-    line-height: 1.7;
-    color: #596467;
-  }
-
-  .buttons {
-    display: flex;
-    gap: 15px;
-    margin-top: 40px;
-  }
-
-  .buttons a {
-    padding: 16px 25px;
-    text-decoration: none;
-    border-radius: 3px;
-  }
-
-  .primary {
-    background: #258c91;
-    color: white;
-  }
-
-  .secondary {
-    border: 1px solid #258c91;
-    color: #258c91;
-  }
+.brand-symbol {
+  display: inline-block;
+  font-size: 0.85em;
+  letter-spacing: -0.38em;
+  margin-right: 0.55em;
+  color: #168c91;
+}
 </style>
