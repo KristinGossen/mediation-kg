@@ -50,7 +50,7 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
           <p class="eyebrow hero-principles">VERTRAULICH · EIGENVERANTWORTLICH · UNPARTEIISCH · FREIWILLIG</p>
 
           <h1>
-            Konflikte klären:<br />
+            <span class="hero-title">Konflikte klären:</span><br />
             <span class="hero-resolution">Zuhören, verstehen, einsehen, lösen.</span>
           </h1>
 
@@ -313,6 +313,11 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
   line-height: 1.02;
   font-weight: 500;
   letter-spacing: -0.04em;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  font-weight: 400;
 }
 
 .hero-resolution {
