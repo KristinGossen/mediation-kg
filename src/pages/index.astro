@@ -51,16 +51,18 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
 
           <p class="satisfaction-statement">Zufriedenheit ist ein Verdienst.</p>
           <div class="mediation-columns">
-            <p class="mediation-benefits">
-              <strong class="mediation-emphasis">Mediation</strong><br />
-              ist freiwillig<br />
-              und verschwiegen<br />
-              bringt Verständigung<br />
-              macht handlungsfähig<br />
-              ist neutral und selbstbestimmt<br />
-              verschafft Klarheit und neue Sichtweisen<br />
-              <strong class="mediation-emphasis">fragt nicht nach einem Schuldigen</strong>
-            </p>
+            <div class="mediation-benefits">
+              <strong class="mediation-emphasis">Mediation</strong>
+              <ul class="mediation-list">
+                <li>ist freiwillig</li>
+                <li>und verschwiegen</li>
+                <li>bringt Verständigung</li>
+                <li>macht handlungsfähig</li>
+                <li>ist neutral und selbstbestimmt</li>
+                <li>verschafft Klarheit und neue Sichtweisen</li>
+                <li><strong class="mediation-emphasis">fragt nicht nach einem Schuldigen</strong></li>
+              </ul>
+            </div>
             <p class="hero-text">
               Ob im privaten Umfeld oder im Unternehmen: Mediation ermöglicht
               strukturierte Gespräche auf Augenhöhe und schafft Raum für Lösungen,
@@ -342,7 +344,7 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
   margin: 36px auto 0;
 }
 
-.mediation-columns > p {
+.mediation-columns > * {
   min-width: 0;
   margin: 0;
 }
@@ -361,10 +363,16 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
   line-height: 1.7;
 }
 .mediation-benefits {
-  text-align: center;
+  text-align: left;
   color: #16343d;
   font-size: 1.2rem;
   line-height: 1.8;
+}
+
+.mediation-list {
+  margin: 12px 0 0;
+  padding-left: 1.25em;
+  list-style-type: disc;
 }
 
 .mediation-emphasis {
