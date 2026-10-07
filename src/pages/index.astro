@@ -50,21 +50,23 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
           <p class="eyebrow hero-principles">VERTRAULICH · EIGENVERANTWORTLICH · UNPARTEIISCH · FREIWILLIG</p>
 
           <p class="satisfaction-statement">Zufriedenheit ist ein Verdienst.</p>
-          <p class="mediation-benefits">
-            <strong class="mediation-emphasis">Mediation</strong><br />
-            ist freiwillig<br />
-            und verschwiegen<br />
-            bringt Verständigung<br />
-            macht handlungsfähig<br />
-            ist neutral und selbstbestimmt<br />
-            verschafft Klarheit und neue Sichtweisen<br />
-            <strong class="mediation-emphasis">fragt nicht nach einem Schuldigen</strong>
-          </p>
-          <p class="hero-text">
-            Ob im privaten Umfeld oder im Unternehmen: Mediation ermöglicht
-            strukturierte Gespräche auf Augenhöhe und schafft Raum für Lösungen,
-            die von allen Beteiligten getragen werden können.
-          </p>
+          <div class="mediation-columns">
+            <p class="mediation-benefits">
+              <strong class="mediation-emphasis">Mediation</strong><br />
+              ist freiwillig<br />
+              und verschwiegen<br />
+              bringt Verständigung<br />
+              macht handlungsfähig<br />
+              ist neutral und selbstbestimmt<br />
+              verschafft Klarheit und neue Sichtweisen<br />
+              <strong class="mediation-emphasis">fragt nicht nach einem Schuldigen</strong>
+            </p>
+            <p class="hero-text">
+              Ob im privaten Umfeld oder im Unternehmen: Mediation ermöglicht
+              strukturierte Gespräche auf Augenhöhe und schafft Raum für Lösungen,
+              die von allen Beteiligten getragen werden können.
+            </p>
+          </div>
         </div>
 
       </section>
@@ -331,16 +333,34 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
   white-space: nowrap;
 }
 
+.mediation-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  gap: clamp(32px, 5vw, 64px);
+  max-width: 1180px;
+  margin: 36px auto 0;
+}
+
+.mediation-columns > p {
+  min-width: 0;
+  margin: 0;
+}
+
+@media (max-width: 800px) {
+  .mediation-columns {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 .hero-text {
   max-width: 760px;
-  margin: 30px auto 0;
   text-align: center;
   color: #566164;
   font-size: 1.2rem;
   line-height: 1.7;
 }
 .mediation-benefits {
-  margin: 36px 0 0;
   text-align: center;
   color: #16343d;
   font-size: 1.2rem;
