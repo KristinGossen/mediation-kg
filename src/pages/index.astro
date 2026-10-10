@@ -34,7 +34,18 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
           <path d={portraitOutline} fill="none" stroke="#168c91" stroke-width="2.5" stroke-linejoin="miter" />
         </svg>
       </a>
-      <nav class="main-nav" aria-label="Hauptnavigation">
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-controls="main-navigation"
+        aria-expanded="false"
+        aria-label="Menü öffnen"
+      >
+        <span class="menu-icon" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+      </button>
+      <nav id="main-navigation" class="main-nav" aria-label="Hauptnavigation">
         {
           navItems.map((item) => (
             <a href={item.href}>{item.label}</a>
@@ -194,6 +205,48 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
     </footer>
   </body>
 </html>
+<script>
+  const header = document.querySelector<HTMLElement>(".site-header");
+  const toggle = document.querySelector<HTMLButtonElement>(".menu-toggle");
+  const navigation = document.querySelector<HTMLElement>("#main-navigation");
+
+  if (header && toggle && navigation) {
+    const setMenuOpen = (open: boolean) => {
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Menü schließen" : "Menü öffnen");
+      navigation.classList.toggle("is-open", open);
+    };
+
+    toggle.addEventListener("click", () => {
+      setMenuOpen(toggle.getAttribute("aria-expanded") !== "true");
+    });
+
+    navigation.addEventListener("click", (event) => {
+      if (event.target instanceof Element && event.target.closest("a")) {
+        setMenuOpen(false);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+        setMenuOpen(false);
+        toggle.focus();
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      if (event.target instanceof Node && !header.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    });
+
+    window.matchMedia("(max-width: 900px)").addEventListener("change", () => {
+      setMenuOpen(false);
+    });
+
+    header.classList.add("navigation-ready");
+  }
+</script>
 <style>
   @font-face {
     font-family: "Cormorant Garamond";
@@ -283,6 +336,57 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
 
   .main-nav a:hover {
     opacity: 0.55;
+  }
+
+  .menu-toggle {
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: #126e73;
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .menu-toggle:hover {
+    background: rgba(22, 140, 145, 0.08);
+  }
+
+  .menu-toggle:focus-visible,
+  .main-nav a:focus-visible {
+    outline: 2px solid #168c91;
+    outline-offset: 4px;
+  }
+
+  .menu-icon {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 22px;
+  }
+
+  .menu-icon span {
+    display: block;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+  }
+
+  .menu-toggle[aria-expanded="true"] .menu-icon span:first-child {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .menu-toggle[aria-expanded="true"] .menu-icon span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle[aria-expanded="true"] .menu-icon span:last-child {
+    transform: translateY(-7px) rotate(-45deg);
   }
 
   .header-contact {
@@ -747,5 +851,61 @@ footer {
   letter-spacing: -0.38em;
   margin-right: 0.55em;
   color: #168c91;
+}
+
+@media (max-width: 900px) {
+  .header-portrait {
+    align-self: end;
+  }
+
+  .navigation-ready .menu-toggle {
+    display: flex;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    align-self: end;
+  }
+
+  .main-nav {
+    justify-content: flex-start;
+    padding-block: 8px 0;
+    border-top: 1px solid rgba(22, 52, 61, 0.1);
+    text-align: left;
+  }
+
+  .navigation-ready .main-nav {
+    grid-row: 2;
+  }
+
+  .navigation-ready .main-nav.is-open {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    overflow-x: visible;
+  }
+
+  .main-nav a {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+
+  .main-nav.is-open a {
+    white-space: normal;
+  }
+
+  .main-nav a:hover {
+    background: rgba(22, 140, 145, 0.08);
+    opacity: 1;
+  }
+
+  .about-header {
+    width: auto;
+    margin-left: 0;
+    text-align: left;
+  }
 }
 </style>
