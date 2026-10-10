@@ -14,7 +14,7 @@ const { src, alt, class: className, width, height, loading, fetchpriority, ...re
 
 <figure class={className} {...rest} data-ai-illustration>
   <img {src} {alt} {width} {height} {loading} {fetchpriority} decoding="async" />
-  <figcaption>KI-generiert</figcaption>
+  <figcaption aria-label="KI-generiert">AI</figcaption>
 </figure>
 
 <style>
@@ -34,15 +34,12 @@ const { src, alt, class: className, width, height, loading, fetchpriority, ...re
 
   figcaption {
     position: absolute;
-    bottom: 10px;
-    left: 10px;
+    bottom: 7px;
+    left: 7px;
     margin: 0;
-    padding: 3px 7px;
-    border-radius: 3px;
-    background: rgba(247, 246, 242, 0.9);
-    color: #344346;
-    font: 500 12px/1.4 Arial, Helvetica, sans-serif;
-    letter-spacing: 0.02em;
+    color: rgba(52, 67, 70, 0.55);
+    font: 400 9px/1.2 Arial, Helvetica, sans-serif;
+    letter-spacing: 0.04em;
     pointer-events: none;
   }
 </style>
