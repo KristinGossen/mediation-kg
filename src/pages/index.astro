@@ -1,6 +1,7 @@
 ---
 import SiteFooter from "../components/SiteFooter.astro";
 import Illustration from "../components/Illustration.astro";
+import ConfluenceStrip from "../components/ConfluenceStrip.astro";
 const navItems = [
   { label: "Privatmediation", href: "/privatmediation/" },
   { label: "Wirtschaftsmediation", href: "/wirtschaftsmediation/" },
@@ -47,14 +48,16 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
           <span></span><span></span><span></span>
         </span>
       </button>
-      <nav id="main-navigation" class="main-nav" aria-label="Hauptnavigation">
-        {
-          navItems.map((item) => (
-            <a href={item.href}>{item.label}</a>
-          ))
-        }
-        <a class="about-header" href="/kristin-gossen/">Über mich</a>
-      </nav>
+      <ConfluenceStrip>
+        <nav id="main-navigation" class="main-nav" aria-label="Hauptnavigation">
+          {
+            navItems.map((item) => (
+              <a href={item.href}>{item.label}</a>
+            ))
+          }
+          <a class="about-header" href="/kristin-gossen/">Über mich</a>
+        </nav>
+      </ConfluenceStrip>
     </header>
     <main>
       <section class="hero">
@@ -273,7 +276,7 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
 
   .site-header {
     min-height: 92px;
-    padding: 18px 6%;
+    padding: 18px 6% 0;
     display: grid;
     grid-template-columns: minmax(0, 1fr) 184px;
     align-items: center;
@@ -312,24 +315,30 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
     grid-row: 2;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     flex-wrap: nowrap;
     min-width: 0;
     overflow-x: auto;
-    gap: 28px;
+    gap: 18px;
     font-size: 1rem;
     text-align: right;
-    padding-block: 6px;
+    padding: 24px max(6%, 54px);
   }
 
   .main-nav a {
     flex-shrink: 0;
     white-space: nowrap;
-    transition: opacity 0.2s ease;
+    padding: 9px 18px;
+    border: 1px solid rgba(22, 52, 61, .18);
+    border-radius: 999px;
+    background: rgba(247, 250, 246, .94);
+    box-shadow: 0 2px 7px rgba(22, 52, 61, .12);
+    transition: background-color .2s ease, box-shadow .2s ease;
   }
 
   .main-nav a:hover {
-    opacity: 0.55;
+    background: #fff;
+    box-shadow: 0 3px 10px rgba(22, 52, 61, .2);
   }
 
   .menu-toggle {
@@ -780,8 +789,8 @@ footer {
   }
 }
 .about-header {
-  width: 184px;
-  margin-left: -20px;
+  width: auto;
+  margin-left: 0;
   text-align: center;
 }
 .header-portrait {
@@ -805,8 +814,6 @@ footer {
   }
 
   .main-nav {
-    grid-column: 2;
-    grid-row: 1;
     flex-wrap: wrap;
     overflow-x: visible;
     gap: 16px 24px;
@@ -834,7 +841,7 @@ footer {
   }
 
   .about-header {
-    width: 132px;
+    width: auto;
   }
 
 }
@@ -862,8 +869,8 @@ footer {
 
   .main-nav {
     justify-content: flex-start;
-    padding-block: 8px 0;
-    border-top: 1px solid rgba(22, 52, 61, 0.1);
+    margin-right: 54px;
+    padding: 18px 0 18px 6%;
     text-align: left;
   }
 
@@ -874,7 +881,7 @@ footer {
   .navigation-ready .main-nav.is-open {
     flex-direction: column;
     align-items: stretch;
-    gap: 0;
+    gap: 10px;
     overflow-x: visible;
   }
 
@@ -883,7 +890,7 @@ footer {
     align-items: center;
     min-height: 48px;
     padding: 10px 12px;
-    border-radius: 6px;
+    border-radius: 999px;
     white-space: nowrap;
   }
 
@@ -892,7 +899,7 @@ footer {
   }
 
   .main-nav a:hover {
-    background: rgba(22, 140, 145, 0.08);
+    background: #fff;
     opacity: 1;
   }
 
