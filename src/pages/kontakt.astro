@@ -1,3 +1,7 @@
+---
+import SiteFooter from "../components/SiteFooter.astro";
+import { contact } from "../data/contact";
+---
 <!doctype html>
 <html lang="de">
   <head>
@@ -28,6 +32,7 @@
           <a class="call-button" href="tel:+4915161235537" aria-label="Mediation KG unter +49 1516 123 5537 anrufen">
             +49 1516 123 5537
           </a>
+          <p class="email-contact">E-Mail: <a href={`mailto:${contact.email}`}>{contact.email}</a></p>
         </address>
         <section class="meeting-options" aria-label="Gesprächsmöglichkeiten">
           <h3>Vor Ort</h3>
@@ -37,6 +42,7 @@
       </div>
       <p class="closing">Ich nehme mir Zeit für Ihre Anliegen und freue mich auf Ihren Anruf.</p>
     </main>
+    <SiteFooter />
   </body>
 </html>
 
@@ -97,6 +103,8 @@
     font-size: 1.2rem;
   }
   .call-label { margin: 28px 0 12px; }
+  .email-contact { margin: 20px 0 0; overflow-wrap: anywhere; }
+  .email-contact a { color: #126e73; text-decoration: underline; text-underline-offset: 3px; }
   .meeting-options { text-align: left; }
   .meeting-options h3 {
     margin: 0 0 16px;

@@ -1,0 +1,25 @@
+---
+import LegalLayout from "../layouts/LegalLayout.astro";
+import { contact } from "../data/contact";
+---
+
+<LegalLayout title="Impressum" description="Anbieterangaben und Kontakt für Mediation Kristin Goßen.">
+  <h2>Angaben gemäß § 5 DDG</h2>
+  <address>
+    <p>
+      <strong>{contact.name}</strong><br />
+      Mediation KG<br />
+      {contact.street}<br />
+      {contact.city}<br />
+      Deutschland
+    </p>
+  </address>
+  <h2>Kontakt</h2>
+  <p>
+    Telefon: <a href={contact.phoneHref}>{contact.phone}</a><br />
+    E-Mail: <a href={`mailto:${contact.email}`}>{contact.email}</a>
+  </p>
+  <h2>Verantwortlich für die Inhalte</h2>
+  <p>{contact.name}, Anschrift wie oben.</p>
+  <p>Informationen zur Verarbeitung personenbezogener Daten finden Sie in der <a href="/datenschutz/">Datenschutzerklärung</a>.</p>
+</LegalLayout>

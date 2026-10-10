@@ -1,0 +1,29 @@
+---
+import { contact } from "../data/contact";
+---
+
+<footer class="site-footer">
+  <p>© {new Date().getFullYear()} MEDIATION KG · Faire Konfliktlösung</p>
+  <nav aria-label="Rechtliche Hinweise und Kontakt">
+    <a href="/impressum/">Impressum</a>
+    <a href="/datenschutz/">Datenschutz</a>
+    <a href={`mailto:${contact.email}`}>{contact.email}</a>
+  </nav>
+</footer>
+
+<style>
+  .site-footer {
+    padding: 24px 6%;
+    border-top: 1px solid rgba(22, 52, 61, 0.1);
+    color: #16343d;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    text-align: center;
+  }
+  p { margin: 0 0 12px; }
+  nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 24px; }
+  a { color: #126e73; text-decoration: none; overflow-wrap: anywhere; }
+  a:hover { text-decoration: underline; }
+  a:focus-visible { outline: 2px solid #168c91; outline-offset: 4px; }
+</style>

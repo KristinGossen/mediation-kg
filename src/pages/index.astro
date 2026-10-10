@@ -1,4 +1,5 @@
 ---
+import SiteFooter from "../components/SiteFooter.astro";
 const navItems = [
   { label: "Privatmediation", href: "/privatmediation/" },
   { label: "Wirtschaftsmediation", href: "/wirtschaftsmediation/" },
@@ -196,13 +197,7 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
       </section>
     </main>
 
-    <footer>
-      <p>© 2026 MEDIATION KG · Faire Konfliktlösung</p>
-      <div>
-        <a href="#">Impressum</a>
-        <a href="#">Datenschutz</a>
-      </div>
-    </footer>
+    <SiteFooter />
   </body>
 </html>
 <script>
