@@ -1,5 +1,6 @@
 ---
 import SiteFooter from "../components/SiteFooter.astro";
+import Illustration from "../components/Illustration.astro";
 const navItems = [
   { label: "Privatmediation", href: "/privatmediation/" },
   { label: "Wirtschaftsmediation", href: "/wirtschaftsmediation/" },
@@ -99,14 +100,13 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
           <article class="service-card" id="privatmediation">
             <p class="service-label">Privatmediation</p>
             <a href="/privatmediation/" aria-label="Privatmediation öffnen">
-              <img
+              <Illustration
                 class="service-image"
                 src="/privatmediation-gemeinsam-umsetzen.png"
-                alt="Illustration einer Familie, die gemeinsam Lösungen für private Konflikte umsetzt."
-                width="1536"
-                height="1024"
+                alt="KI-generierte Illustration einer Familie, die gemeinsam Lösungen für private Konflikte umsetzt."
+                width={1536}
+                height={1024}
                 loading="lazy"
-                decoding="async"
               />
             </a>
             <h3>Wenn Beziehungen durch Konflikte belastet werden.</h3>
@@ -120,14 +120,13 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
           <article class="service-card" id="wirtschaftsmediation">
             <p class="service-label">Wirtschaftsmediation</p>
             <a href="/wirtschaftsmediation/" aria-label="Wirtschaftsmediation öffnen">
-            <img
+            <Illustration
               class="service-image"
               src="/motiviertes-team.png"
-              alt="Illustration eines motivierten Teams, das in einem hellen Büro zusammenarbeitet."
-              width="1536"
-              height="1024"
+              alt="KI-generierte Illustration eines motivierten Teams, das in einem hellen Büro zusammenarbeitet."
+              width={1536}
+              height={1024}
               loading="lazy"
-              decoding="async"
             />
             </a>
             <h3>Wenn Zusammenarbeit wieder möglich werden soll.</h3>

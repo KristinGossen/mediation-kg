@@ -1,5 +1,6 @@
 ---
 import SiteFooter from "../components/SiteFooter.astro";
+import Illustration from "../components/Illustration.astro";
 ---
 <!doctype html>
 <html lang="de">
@@ -18,14 +19,13 @@ import SiteFooter from "../components/SiteFooter.astro";
     </header>
     <main>
       <h1>Wirtschaftsmediation</h1>
-      <img
+      <Illustration
         class="team-image"
         src="/motiviertes-team.png"
-        alt="Illustration eines motivierten Teams, das in einem hellen Büro zusammenarbeitet."
-        width="1536"
-        height="1024"
+        alt="KI-generierte Illustration eines motivierten Teams, das in einem hellen Büro zusammenarbeitet."
+        width={1536}
+        height={1024}
         fetchpriority="high"
-        decoding="async"
       />
       <div class="description">
         <h2>Wenn Zusammenarbeit wieder möglich werden soll.</h2>

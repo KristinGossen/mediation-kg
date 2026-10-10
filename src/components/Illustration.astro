@@ -1,0 +1,48 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  width: number;
+  height: number;
+  loading?: "eager" | "lazy";
+  fetchpriority?: "high" | "low" | "auto";
+}
+
+const { src, alt, class: className, width, height, loading, fetchpriority, ...rest } = Astro.props;
+---
+
+<figure class={className} {...rest} data-ai-illustration>
+  <img {src} {alt} {width} {height} {loading} {fetchpriority} decoding="async" />
+  <figcaption>KI-generiert</figcaption>
+</figure>
+
+<style>
+  figure {
+    position: relative;
+    display: block;
+    min-width: 0;
+    margin: 0;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: inherit;
+  }
+
+  figcaption {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    margin: 0;
+    padding: 3px 7px;
+    border-radius: 3px;
+    background: rgba(247, 246, 242, 0.9);
+    color: #344346;
+    font: 500 12px/1.4 Arial, Helvetica, sans-serif;
+    letter-spacing: 0.02em;
+    pointer-events: none;
+  }
+</style>

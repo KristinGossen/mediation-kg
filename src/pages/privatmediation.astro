@@ -1,5 +1,6 @@
 ---
 import SiteFooter from "../components/SiteFooter.astro";
+import Illustration from "../components/Illustration.astro";
 ---
 <!doctype html>
 <html lang="de">
@@ -18,14 +19,13 @@ import SiteFooter from "../components/SiteFooter.astro";
     </header>
     <main>
       <h1>Privatmediation</h1>
-      <img
+      <Illustration
         class="service-image"
         src="/privatmediation-gemeinsam-umsetzen.png"
-        alt="Illustration einer Familie, die gemeinsam Lösungen für private Konflikte umsetzt."
-        width="1536"
-        height="1024"
+        alt="KI-generierte Illustration einer Familie, die gemeinsam Lösungen für private Konflikte umsetzt."
+        width={1536}
+        height={1024}
         fetchpriority="high"
-        decoding="async"
       />
       <div class="description">
         <h2>Wenn Beziehungen durch Konflikte belastet werden.</h2>
