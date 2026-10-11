@@ -41,6 +41,37 @@ import Illustration from "../components/Illustration.astro";
           - sie ist der Treibstoff für Hochleistung.
         </p>
       </div>
+      <div class="mediation-stages">
+        <section class="mediation-stage" aria-labelledby="understanding-heading">
+          <h2 id="understanding-heading">Verständigung</h2>
+          <ul>
+            <li>Rahmenbedingungen klären</li>
+            <li>Interessen und Optionen</li>
+            <li>Mediationsvereinbarung</li>
+            <li>verfügbare Ressourcen ermitteln</li>
+          </ul>
+        </section>
+        <section class="mediation-stage" aria-labelledby="success-heading">
+          <h2 id="success-heading">Entschiedener Erfolg</h2>
+          <ul>
+            <li>Individuelle Dialoge</li>
+            <li>Bedürfnisse äußern</li>
+            <li>Konfliktthemen priorisieren</li>
+            <li>Entwickeln von Lösungsideen</li>
+            <li>Zielorientierte Maßnahmen festlegen</li>
+          </ul>
+        </section>
+        <section class="mediation-stage" aria-labelledby="conclusion-heading">
+          <h2 id="conclusion-heading">Fazit</h2>
+          <ul>
+            <li>Forderungen erfasst</li>
+            <li>Prekäre Situation erkannt</li>
+            <li>Effektive gemeinsame Lösungen</li>
+            <li>Reflektierte Selbstwahrnehmung</li>
+            <li>Zielorientierte Maßnahmen umsetzen</li>
+          </ul>
+        </section>
+      </div>
     </main>
     <SiteFooter />
   </body>
@@ -134,6 +165,29 @@ import Illustration from "../components/Illustration.astro";
     text-align: center;
     font-size: 1.2rem;
     line-height: 1.6;
+  }
+
+  .mediation-stages {
+    max-width: 760px;
+    margin: 56px auto 0;
+  }
+
+  .mediation-stage {
+    padding: 28px 0;
+    border-top: 1px solid #dce7e5;
+  }
+
+  .mediation-stage h2 {
+    margin: 0 0 16px;
+  }
+
+  .mediation-stage ul {
+    margin: 0;
+    padding-left: 1.25em;
+  }
+
+  .mediation-stage li + li {
+    margin-top: 8px;
   }
 
 </style>
