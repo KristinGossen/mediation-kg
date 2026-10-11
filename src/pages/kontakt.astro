@@ -30,10 +30,7 @@ import { contact } from "../data/contact";
         <address aria-label="Mediation KG – Anschrift und Telefon">
           <img class="contact-logo" src="/mediation-logo.png" alt="Mediation KG – Faire Konfliktlösung" width="2079" height="756" />
           <p class="business-address">Kohlenstrasse 25<br />42555 Velbert</p>
-          <p class="call-label">Telefonisch erreichen Sie mich unter:</p>
-          <a class="call-button" href="tel:+4915161235537" aria-label="Mediation KG unter +49 1516 123 5537 anrufen">
-            +49 1516 123 5537
-          </a>
+          <p class="phone-contact">Telefon: <a href={contact.phoneHref}>{contact.phone}</a></p>
           <p class="email-contact">E-Mail: <a href={`mailto:${contact.email}`}>{contact.email}</a></p>
         </address>
         <section class="meeting-options" aria-label="Gesprächsmöglichkeiten">
@@ -107,9 +104,9 @@ import { contact } from "../data/contact";
     font-family: "Cormorant Garamond", "Times New Roman", serif;
     font-size: 1.2rem;
   }
-  .call-label { margin: 28px 0 12px; }
-  .email-contact { margin: 20px 0 0; overflow-wrap: anywhere; }
-  .email-contact a { color: #126e73; text-decoration: underline; text-underline-offset: 3px; }
+  .phone-contact { margin: 28px 0 0; }
+  .email-contact { margin: 8px 0 0; overflow-wrap: anywhere; }
+  .phone-contact a, .email-contact a { color: #126e73; text-decoration: underline; text-underline-offset: 3px; }
   .meeting-options { text-align: left; }
   .meeting-options h3 {
     margin: 0 0 16px;
@@ -122,16 +119,6 @@ import { contact } from "../data/contact";
   .meeting-options p { margin: 0; }
   .meeting-options .online-heading { margin: 32px 0 0; }
   main > .closing { margin-top: 40px; margin-bottom: 0; }
-  .call-button {
-    display: inline-block;
-    margin-top: 0;
-    padding: 14px 24px;
-    border: 1px solid #e5b62f;
-    border-radius: 999px;
-    background: #e5b62f;
-    font-size: 1.2rem;
-    white-space: nowrap;
-  }
   :global(a:focus-visible) { outline: 2px solid #168c91; outline-offset: 5px; }
   @media (max-width: 700px) {
     .contact-grid { grid-template-columns: minmax(0, 1fr); }
