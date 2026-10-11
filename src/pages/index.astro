@@ -212,6 +212,7 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
       toggle.setAttribute("aria-expanded", String(open));
       toggle.setAttribute("aria-label", open ? "Menü schließen" : "Menü öffnen");
       navigation.classList.toggle("is-open", open);
+      header.classList.toggle("menu-open", open);
     };
 
     toggle.addEventListener("click", () => {
@@ -889,6 +890,10 @@ footer {
 @media (max-width: 900px) {
   .header-portrait {
     align-self: end;
+  }
+
+  .navigation-ready:not(.menu-open) :global(.confluence-strip) {
+    display: none;
   }
 
   .navigation-ready .menu-toggle {
