@@ -34,18 +34,14 @@ const privateImages = await Promise.all(
     </header>
     <main>
       <h1>Privatmediation</h1>
-      <div class="private-gallery" role="group" aria-label="Vom Konflikt über das Gespräch zur gemeinsamen Lösung">
-        {privateImages.map(({ image, alt }, index) => (
-          <Illustration
-            src={image.src}
-            alt={alt}
-            width={Number(image.attributes.width)}
-            height={Number(image.attributes.height)}
-            loading={index === 0 ? "eager" : "lazy"}
-            fetchpriority={index === 0 ? "high" : "auto"}
-          />
-        ))}
-      </div>
+      <Illustration
+        class="service-image"
+        src="/privatmediation-gemeinsam-umsetzen.png"
+        alt="KI-generierte Illustration einer Familie, die gemeinsam Lösungen für private Konflikte umsetzt."
+        width={1536}
+        height={1024}
+        fetchpriority="high"
+      />
       <div class="description">
         <h2>Wenn Beziehungen durch Konflikte belastet werden.</h2>
         <p>
@@ -86,6 +82,17 @@ const privateImages = await Promise.all(
             <li>5. Lösungsvereinbarung</li>
           </ol>
         </section>
+      </div>
+      <div class="private-gallery" role="group" aria-label="Vom Konflikt über das Gespräch zur gemeinsamen Lösung">
+        {privateImages.map(({ image, alt }) => (
+          <Illustration
+            src={image.src}
+            alt={alt}
+            width={Number(image.attributes.width)}
+            height={Number(image.attributes.height)}
+            loading="lazy"
+          />
+        ))}
       </div>
     </main>
     <SiteFooter />
@@ -158,11 +165,18 @@ const privateImages = await Promise.all(
     letter-spacing: -0.025em;
   }
 
+  .service-image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
   .private-gallery {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 20px;
     align-items: start;
+    margin-top: 40px;
   }
 
   .description {
