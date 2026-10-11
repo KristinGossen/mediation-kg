@@ -1,5 +1,6 @@
 ---
 import SiteFooter from "../components/SiteFooter.astro";
+import ContactStrip from "../components/ContactStrip.astro";
 interface Props {
   title: string;
   description: string;
@@ -17,6 +18,7 @@ const { title, description, category } = Astro.props;
     <title>{title} | Mediation Kristin Goßen</title>
   </head>
   <body>
+    <ContactStrip />
     <header>
       <a class="brand" href="/" aria-label="Mediation Kristin Goßen – Startseite">
         <img src="/mediation-logo.png" alt="Mediation KG – Faire Konfliktlösung" />

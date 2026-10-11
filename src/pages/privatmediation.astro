@@ -1,6 +1,7 @@
 ---
 import { getImage } from "astro:assets";
 import SiteFooter from "../components/SiteFooter.astro";
+import ContactStrip from "../components/ContactStrip.astro";
 import Illustration from "../components/Illustration.astro";
 import privateConflict from "../assets/privatmediation-1.png";
 import privateDialogue from "../assets/privatmediation-2.png";
@@ -26,6 +27,7 @@ const privateImages = await Promise.all(
     <title>Privatmediation | Kristin Goßen</title>
   </head>
   <body>
+    <ContactStrip />
     <header>
       <a class="brand" href="/" aria-label="Mediation Kristin Goßen – Startseite">
         <img src="/mediation-logo.png" alt="Mediation KG – Faire Konfliktlösung" />
