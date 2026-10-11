@@ -495,7 +495,18 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
 
 @media (min-width: 801px) {
   .mediation-columns {
+    position: relative;
     align-items: start;
+  }
+
+  .mediation-columns::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background: rgba(22, 52, 61, 0.22);
   }
 
   .mediation-columns > .hero-text {
@@ -547,7 +558,18 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
   }
 
   .hero-text {
+    position: relative;
     grid-row: 3;
+  }
+
+  .hero-text::before {
+    content: "";
+    position: absolute;
+    top: -14px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(22, 52, 61, 0.22);
   }
 }
 
