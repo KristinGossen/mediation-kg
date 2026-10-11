@@ -1,6 +1,21 @@
 ---
+import { getImage } from "astro:assets";
 import SiteFooter from "../components/SiteFooter.astro";
 import Illustration from "../components/Illustration.astro";
+import privateConflict from "../assets/privatmediation-1.png";
+import privateDialogue from "../assets/privatmediation-2.png";
+import privateSolution from "../assets/privatmediation-3.png";
+
+const privateImages = await Promise.all(
+  [
+    { src: privateConflict, alt: "KI-generierte Illustration einer Familie mit angespannten Beziehungen am gemeinsamen Tisch." },
+    { src: privateDialogue, alt: "KI-generierte Illustration einer Familie, die miteinander spricht und ihre Sichtweisen austauscht." },
+    { src: privateSolution, alt: "KI-generierte Illustration einer Familie, die gemeinsame Lösungen vereinbart und miteinander umsetzt." },
+  ].map(async ({ src, alt }) => ({
+    image: await getImage({ src, width: 1024, format: "webp", quality: 85 }),
+    alt,
+  })),
+);
 ---
 <!doctype html>
 <html lang="de">
@@ -19,14 +34,18 @@ import Illustration from "../components/Illustration.astro";
     </header>
     <main>
       <h1>Privatmediation</h1>
-      <Illustration
-        class="service-image"
-        src="/privatmediation-gemeinsam-umsetzen.png"
-        alt="KI-generierte Illustration einer Familie, die gemeinsam Lösungen für private Konflikte umsetzt."
-        width={1536}
-        height={1024}
-        fetchpriority="high"
-      />
+      <div class="private-gallery" role="group" aria-label="Vom Konflikt über das Gespräch zur gemeinsamen Lösung">
+        {privateImages.map(({ image, alt }, index) => (
+          <Illustration
+            src={image.src}
+            alt={alt}
+            width={Number(image.attributes.width)}
+            height={Number(image.attributes.height)}
+            loading={index === 0 ? "eager" : "lazy"}
+            fetchpriority={index === 0 ? "high" : "auto"}
+          />
+        ))}
+      </div>
       <div class="description">
         <h2>Wenn Beziehungen durch Konflikte belastet werden.</h2>
         <p>
@@ -139,10 +158,11 @@ import Illustration from "../components/Illustration.astro";
     letter-spacing: -0.025em;
   }
 
-  .service-image {
-    display: block;
-    width: 100%;
-    height: auto;
+  .private-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    align-items: start;
   }
 
   .description {
@@ -206,5 +226,11 @@ import Illustration from "../components/Illustration.astro";
     margin: 1lh 0 0;
     padding: 0;
     list-style: none;
+  }
+
+  @media (max-width: 800px) {
+    .private-gallery {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
