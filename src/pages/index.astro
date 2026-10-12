@@ -63,6 +63,7 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
     </header>
     <main>
       <section class="hero">
+        <div class="hero-introduction">
         <div class="hero-content">
           <p class="hero-intro">Faire Konfliktlösung, für jeden der bereit ist,<br />Stress zu bewältigen und<br />seine Lebensqualität zu steigern.</p>
           <p class="eyebrow hero-principles">
@@ -73,6 +74,10 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
           </p>
 
           <p class="satisfaction-statement">Zufriedenheit ist ein Verdienst.</p>
+        </div>
+        </div>
+        <div class="hero-mediation">
+        <div class="hero-content">
           <div class="mediation-layout">
             <div class="mediation-columns">
             <div class="mediation-benefits">
@@ -97,6 +102,7 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
               <strong class="mediation-emphasis">fragt nicht nach einem Schuldigen</strong>
             </p>
           </div>
+        </div>
         </div>
 
       </section>
@@ -407,9 +413,18 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
     color: #126e73;
     font-size: 0.85rem;
   }
-  .hero {
-  padding: 140px 8% 110px;
+.hero {
   background: #eee3d1;
+}
+
+.hero-introduction {
+  padding: 140px 8% 28px;
+  background: #f7f6f2;
+}
+
+.hero-mediation {
+  display: flow-root;
+  padding: 0 8% 110px;
 }
 
 .hero-inner {
@@ -489,7 +504,7 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
   align-items: center;
   gap: clamp(32px, 5vw, 64px);
   max-width: 1180px;
-  margin: 36px auto 0;
+  margin: 8px auto 0;
 }
 
 .mediation-columns > * {
@@ -519,7 +534,7 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
   .mediation-columns {
     position: relative;
     align-items: start;
-    margin-top: calc(36px + 1lh);
+    margin-top: calc(8px + 1lh);
   }
 
   .mediation-columns::after {
@@ -563,7 +578,7 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     gap: 28px;
-    margin-top: 36px;
+    margin-top: 8px;
   }
 
   .mediation-columns {
