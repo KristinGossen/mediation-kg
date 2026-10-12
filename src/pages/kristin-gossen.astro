@@ -145,7 +145,12 @@ import ContactStrip from "../components/ContactStrip.astro";
     padding: 36px 24px 0;
   }
   .description { max-width: 760px; margin: 0 auto; }
-  .closing-contact { padding: 0 24px 72px; }
+  .closing-contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 44px 24px;
+  }
   h2 {
     margin: 0 0 24px;
     color: #168c91;
@@ -157,7 +162,7 @@ import ContactStrip from "../components/ContactStrip.astro";
   .description p { margin: 0 0 24px; font-size: 1.1rem; }
   .consultation {
     display: inline-block;
-    margin-top: 16px;
+    margin-top: 0;
     padding: 14px 24px;
     border: 1px solid #e5b62f;
     border-radius: 999px;
