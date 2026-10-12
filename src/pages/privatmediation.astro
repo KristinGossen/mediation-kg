@@ -60,6 +60,14 @@ const privateImages = await Promise.all(
       <div class="description followup-description">
         <div class="consultation-text">
           <p class="satisfaction-statement">Zufriedenheit ist nicht selbstverständlich<br />und oft schwer umsetzbar.</p>
+        </div>
+      </div>
+      </div>
+      </div>
+      <div class="private-guidance">
+      <div class="private-content">
+      <div class="description followup-description">
+        <div class="consultation-text">
           <p>
             Wir begleiten Sie in Gesprächen und führen Sie zu Ihren gemeinsamen Lösungen,
             für eine leichtere Zukunft.
@@ -69,8 +77,14 @@ const privateImages = await Promise.all(
             und danken Ihnen für Ihr Vertrauen.
           </p>
         </div>
+        <a class="consultation" href="tel:+4915161235537">Unverbindliches Erstgespräch</a>
+      </div>
+      </div>
+      </div>
+      <div class="private-process">
+      <div class="private-content">
+      <div class="description followup-description">
         <section class="mediation-process" aria-labelledby="process-heading">
-          <a class="consultation" href="tel:+4915161235537">Unverbindliches Erstgespräch</a>
           <h2 id="process-heading">Wie läuft Mediation ab?</h2>
           <p class="process-principles">Nach den 5 Phasen der Mediation:</p>
           <ol class="mediation-phases">
@@ -179,7 +193,18 @@ const privateImages = await Promise.all(
   }
 
   .private-followup {
-    padding: 32px 24px 72px;
+    padding: 32px 24px 0;
+    background: #f7f6f2;
+  }
+
+  .private-guidance {
+    padding: 1.6rem 24px 24px;
+    background: #eee3d1;
+  }
+
+  .private-process {
+    display: flow-root;
+    padding: 0 24px 72px;
     background: #f7f6f2;
   }
 
@@ -236,6 +261,10 @@ const privateImages = await Promise.all(
     background: #e5b62f;
   }
 
+  .private-guidance .consultation {
+    margin-top: 52px;
+  }
+
   .consultation-text {
     margin-top: 0;
     font-size: 1rem;
@@ -257,16 +286,16 @@ const privateImages = await Promise.all(
     margin-top: 1lh;
   }
 
-  .consultation-text p:last-child {
+  .consultation-text p + p:last-child {
     margin-top: 2lh;
   }
 
   .mediation-process {
-    margin-top: 36px;
+    margin-top: 0;
   }
 
   #process-heading {
-    margin-top: calc(0.83em + 1lh);
+    margin-top: calc(0.83em + 1lh - 24px);
     color: #168c91;
     font-family: "Cormorant Garamond", "Times New Roman", serif;
     font-size: clamp(2rem, 3.2vw, 2.65rem);
