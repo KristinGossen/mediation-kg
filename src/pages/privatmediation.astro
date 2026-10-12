@@ -35,6 +35,8 @@ const privateImages = await Promise.all(
       <a class="back-link" href="/#privatmediation">← Zur Startseite</a>
     </header>
     <main>
+      <div class="private-introduction">
+      <div class="private-content">
       <h1>Privatmediation</h1>
       <Illustration
         class="service-image"
@@ -50,6 +52,12 @@ const privateImages = await Promise.all(
           Für Paare, Familien, Nachbarn und andere private Konfliktsituationen –
           vertraulich, persönlich und mit Blick auf eine gemeinsame Lösung.
         </p>
+      </div>
+      </div>
+      </div>
+      <div class="private-followup">
+      <div class="private-content">
+      <div class="description followup-description">
         <div class="consultation-text">
           <p class="satisfaction-statement">Zufriedenheit ist nicht selbstverständlich<br />und oft schwer umsetzbar.</p>
           <p>
@@ -100,6 +108,8 @@ const privateImages = await Promise.all(
           />
         ))}
       </div>
+      </div>
+      </div>
     </main>
     <SiteFooter />
   </body>
@@ -120,7 +130,7 @@ const privateImages = await Promise.all(
 
   :global(body) {
     margin: 0;
-    background: #eee3d1;
+    background: #f7f6f2;
     color: #16343d;
     font-family: "Times New Roman", Times, serif;
     line-height: 1.6;
@@ -157,10 +167,20 @@ const privateImages = await Promise.all(
     color: #168c91;
   }
 
-  main {
-    max-width: 1376px;
+  .private-content {
+    max-width: 1328px;
     margin: 0 auto;
-    padding: 40px 24px 72px;
+  }
+
+  .private-introduction {
+    display: flow-root;
+    padding: 40px 24px 0;
+    background: #eee3d1;
+  }
+
+  .private-followup {
+    padding: 60px 24px 72px;
+    background: #f7f6f2;
   }
 
   h1 {
@@ -193,6 +213,14 @@ const privateImages = await Promise.all(
     text-align: center;
   }
 
+  .followup-description {
+    margin-top: 0;
+  }
+
+  .private-introduction .description > p:last-child {
+    margin-bottom: 0;
+  }
+
   h2 {
     font-size: clamp(1.5rem, 3vw, 2rem);
     line-height: 1.25;
@@ -209,7 +237,7 @@ const privateImages = await Promise.all(
   }
 
   .consultation-text {
-    margin-top: 60px;
+    margin-top: 0;
     font-size: 1rem;
     line-height: 1.6;
   }
