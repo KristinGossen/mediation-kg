@@ -31,13 +31,15 @@ import Illustration from "../components/Illustration.astro";
         height={1024}
         fetchpriority="high"
       />
+      </div>
+      </div>
+      <div class="business-description">
       <div class="description">
         <h2>Wenn Zusammenarbeit wieder möglich werden soll.</h2>
         <p>
           Für Konflikte zwischen Mitarbeitenden, Teams oder Führungskräften –
           professionell, strukturiert und auf Wunsch dokumentiert.
         </p>
-      </div>
       </div>
       </div>
       <div class="satisfaction-section">
@@ -81,10 +83,10 @@ import Illustration from "../components/Illustration.astro";
           </ul>
         </section>
       </div>
+      </div>
+      </div>
       <div class="closing-contact">
         <a class="consultation" href="tel:+4915161235537">Unverbindliches Erstgespräch</a>
-      </div>
-      </div>
       </div>
     </main>
     <SiteFooter />
@@ -142,10 +144,16 @@ import Illustration from "../components/Illustration.astro";
 
   .business-introduction {
     display: flow-root;
-    padding: 40px 24px 28px;
+    padding: 40px 24px 0;
   }
 
-  .business-introduction .description > p:last-child {
+  .business-description {
+    display: flow-root;
+    padding: 0 24px 28px;
+    background: #f7f6f2;
+  }
+
+  .description > p:last-child {
     margin-bottom: 0;
   }
 
@@ -155,7 +163,8 @@ import Illustration from "../components/Illustration.astro";
   }
 
   .business-process {
-    padding: 28px 24px 72px;
+    padding: 28px 24px 0;
+    background: #f7f6f2;
   }
 
   h1 {
@@ -193,7 +202,7 @@ import Illustration from "../components/Illustration.astro";
   }
 
   .closing-contact {
-    margin-top: 24px;
+    padding: 24px 24px 72px;
     text-align: center;
   }
 
