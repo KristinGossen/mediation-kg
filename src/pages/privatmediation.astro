@@ -51,7 +51,7 @@ const privateImages = await Promise.all(
           vertraulich, persönlich und mit Blick auf eine gemeinsame Lösung.
         </p>
         <div class="consultation-text">
-          <p class="satisfaction-statement">Zufriedenheit ist nicht selbstverständlich und oft schwer umsetzbar.</p>
+          <p class="satisfaction-statement">Zufriedenheit ist nicht selbstverständlich<br />und oft schwer umsetzbar.</p>
           <p>
             Wir begleiten Sie in Gesprächen und führen Sie zu Ihren gemeinsamen Lösungen,
             für eine leichtere Zukunft.
@@ -220,6 +220,7 @@ const privateImages = await Promise.all(
 
   .satisfaction-statement {
     font-family: "Cormorant Garamond", "Times New Roman", serif;
+    font-size: clamp(1.5rem, 3vw, 2rem);
     font-weight: 400;
   }
 
