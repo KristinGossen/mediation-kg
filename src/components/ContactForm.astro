@@ -1,0 +1,240 @@
+---
+import { contactTopics } from "../data/contact-form.js";
+import { contact } from "../data/contact";
+---
+
+<section id="kontaktformular" class="form-section" aria-labelledby="contact-form-heading">
+  <div class="form-card" data-contact-form>
+    <div class="form-heading">
+      <h2 id="contact-form-heading">Kontaktformular</h2>
+      <p class="step-indicator" aria-live="polite" data-step-label>Schritt 1 von 2</p>
+    </div>
+    <form action="/api/contact" method="post">
+      <fieldset data-topic-step>
+        <legend>Worum geht es?</legend>
+        <div class="topic-options">
+          {contactTopics.map((topic) => (
+            <label class="topic-option">
+              <input type="radio" name="topic" value={topic} required />
+              <span>{topic}</span>
+              <span class="topic-arrow" aria-hidden="true">→</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+      <fieldset data-details-step>
+        <legend>Wie können wir Sie erreichen?</legend>
+        <p class="selected-topic" data-selected-topic></p>
+        <div class="form-fields">
+          <label>Ihr Name <span class="required-hint">(Pflichtfeld)</span>
+            <input name="name" autocomplete="name" maxlength="100" required />
+          </label>
+          <label>Ihre E-Mail-Adresse <span class="required-hint">(Pflichtfeld)</span>
+            <input name="email" type="email" autocomplete="email" maxlength="254" required />
+          </label>
+          <label>Telefonnummer <span class="required-hint">(optional)</span>
+            <input name="phone" type="tel" autocomplete="tel" maxlength="50" />
+          </label>
+          <label class="message-field">Ihre Nachricht <span class="required-hint">(Pflichtfeld)</span>
+            <textarea name="message" rows="5" minlength="10" maxlength="2000" required aria-describedby="message-hint"></textarea>
+          </label>
+        </div>
+        <p id="message-hint" class="form-note">Eine kurze Beschreibung Ihres Anliegens genügt.</p>
+        <div class="honeypot" aria-hidden="true">
+          <label>Website <input name="website" tabindex="-1" autocomplete="off" /></label>
+        </div>
+        <p class="form-note">Wir verwenden Ihre Angaben, um Ihre Anfrage zu beantworten. Mehr dazu in unserer <a href="/datenschutz/">Datenschutzerklärung</a>.</p>
+        <div data-spam-check></div>
+        <div class="form-actions">
+          <button class="back-button" type="button" data-back hidden>← Zurück</button>
+          <button class="send-button" type="submit" data-send disabled>Nachricht senden</button>
+        </div>
+      </fieldset>
+      <p class="form-status" role="status" aria-live="polite" data-status></p>
+      <p class="contact-alternative">Oder schreiben Sie uns direkt an <a href={`mailto:${contact.email}`}>{contact.email}</a>.</p>
+      <noscript><p>Für das Formular ist JavaScript erforderlich. Sie können uns jederzeit direkt per E-Mail kontaktieren.</p></noscript>
+    </form>
+    <div class="form-success" data-success hidden tabindex="-1">
+      <h3>Vielen Dank für Ihre Anfrage.</h3>
+      <p>Ihre Nachricht wurde übermittelt. Wir melden uns bei Ihnen.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  type Turnstile = {
+    render: (element: HTMLElement, options: Record<string, unknown>) => string;
+    reset: (id: string) => void;
+  };
+  const root = document.querySelector<HTMLElement>("[data-contact-form]");
+  if (root) {
+    const form = root.querySelector<HTMLFormElement>("form")!;
+    const topics = root.querySelector<HTMLFieldSetElement>("[data-topic-step]")!;
+    const details = root.querySelector<HTMLFieldSetElement>("[data-details-step]")!;
+    const back = root.querySelector<HTMLButtonElement>("[data-back]")!;
+    const send = root.querySelector<HTMLButtonElement>("[data-send]")!;
+    const status = root.querySelector<HTMLElement>("[data-status]")!;
+    const progress = root.querySelector<HTMLElement>("[data-step-label]")!;
+    const success = root.querySelector<HTMLElement>("[data-success]")!;
+    const captcha = root.querySelector<HTMLElement>("[data-spam-check]")!;
+    let token = "";
+    let widgetId: string | undefined;
+    let checking: Promise<void> | undefined;
+    let sending = false;
+    const turnstile = () => (window as Window & { turnstile?: Turnstile }).turnstile;
+
+    details.hidden = true;
+    details.disabled = true;
+    back.hidden = false;
+
+    function showStatus(message: string) {
+      status.textContent = message;
+    }
+
+    function prepareSending() {
+      if (checking) return checking;
+      checking = (async () => {
+        send.disabled = true;
+        try {
+          const response = await fetch("/api/contact", { cache: "no-store" });
+          if (!response.ok) throw new Error("unavailable");
+          const config = await response.json();
+          if (!config.available || !config.siteKey) throw new Error("unavailable");
+          if (!turnstile()) {
+            await new Promise<void>((resolve, reject) => {
+              const script = document.createElement("script");
+              script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+              script.async = true;
+              script.onload = () => resolve();
+              script.onerror = () => reject(new Error("captcha"));
+              document.head.appendChild(script);
+            });
+          }
+          widgetId = turnstile()!.render(captcha, {
+            sitekey: config.siteKey,
+            action: "contact",
+            theme: "light",
+            size: "flexible",
+            callback: (value: string) => { token = value; send.disabled = false; showStatus(""); },
+            "expired-callback": () => { token = ""; send.disabled = true; showStatus("Bitte bestätigen Sie den Spamschutz erneut."); },
+            "error-callback": () => { token = ""; send.disabled = true; showStatus("Der Spamschutz konnte nicht geladen werden. Bitte versuchen Sie es erneut oder schreiben Sie uns per E-Mail."); },
+          });
+        } catch {
+          checking = undefined;
+          showStatus("Das Formular kann gerade keine Nachrichten senden. Bitte schreiben Sie uns direkt per E-Mail.");
+        }
+      })();
+      return checking;
+    }
+
+    function showDetails() {
+      if (!details.hidden) return;
+      const selected = form.querySelector<HTMLInputElement>('input[name="topic"]:checked')!;
+      root.querySelector<HTMLElement>("[data-selected-topic]")!.textContent = selected.value;
+      topics.hidden = true;
+      details.hidden = false;
+      details.disabled = false;
+      progress.textContent = "Schritt 2 von 2";
+      form.querySelector<HTMLInputElement>('input[name="name"]')!.focus();
+      void prepareSending();
+    }
+    topics.addEventListener("change", showDetails);
+    topics.addEventListener("click", (event) => {
+      if (event.target instanceof HTMLInputElement) showDetails();
+    });
+
+    back.addEventListener("click", () => {
+      if (sending) return;
+      topics.hidden = false;
+      details.hidden = true;
+      details.disabled = true;
+      progress.textContent = "Schritt 1 von 2";
+      topics.querySelector<HTMLInputElement>("input:checked")!.focus();
+      showStatus("");
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (sending || !form.reportValidity()) return;
+      if (!token) { void prepareSending(); return; }
+      sending = true;
+      send.disabled = true;
+      back.disabled = true;
+      send.textContent = "Wird gesendet …";
+      showStatus("");
+      let failureMessage = "Die Anfrage konnte nicht bestätigt werden. Bitte versuchen Sie es erneut oder schreiben Sie uns per E-Mail.";
+      try {
+        const payload = Object.fromEntries(new FormData(form).entries());
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...payload, token }),
+          signal: AbortSignal.timeout(30000),
+        });
+        const result = await response.json();
+        if (!response.ok || !result.success) {
+          if (typeof result.message === "string") failureMessage = result.message;
+          throw new Error("send_failed");
+        }
+        form.hidden = true;
+        progress.hidden = true;
+        success.hidden = false;
+        form.reset();
+        success.focus();
+      } catch {
+        showStatus(failureMessage);
+        token = "";
+        if (widgetId) turnstile()?.reset(widgetId);
+      } finally {
+        sending = false;
+        back.disabled = false;
+        send.disabled = !token;
+        send.textContent = "Nachricht senden";
+      }
+    });
+  }
+</script>
+
+<style>
+  .form-section { background: #f7f6f2; padding: 48px 24px 64px; text-align: left; }
+  .form-card { max-width: 960px; margin: 0 auto; padding: clamp(24px, 5vw, 48px); border: 1px solid #d8dfdc; border-radius: 12px; }
+  .form-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 40px; }
+  h2 { margin: 0; color: #168c91; font-family: "Cormorant Garamond", "Times New Roman", serif; font-size: clamp(2rem, 5vw, 2.6rem); font-weight: 700; line-height: 1.3; }
+  .step-indicator { margin: 0; color: #126e73; font-size: 0.95rem; }
+  fieldset { padding: 0; margin: 0; border: 0; min-width: 0; }
+  legend { padding: 0; margin-bottom: 20px; font-size: 1.25rem; font-weight: 700; }
+  .topic-options { display: grid; gap: 14px; }
+  .topic-option { position: relative; display: flex; align-items: center; gap: 14px; cursor: pointer; min-height: 64px; padding: 16px 20px; background: #eee3d1; border: 1px solid #d8cfbf; border-radius: 8px; font-weight: 700; }
+  .topic-option input { accent-color: #126e73; width: 18px; height: 18px; flex-shrink: 0; margin: 0; }
+  .topic-option:hover, .topic-option:has(input:checked) { border-color: #126e73; }
+  .topic-option:focus-within { outline: 2px solid #168c91; outline-offset: 3px; }
+  .topic-arrow { margin-left: auto; color: #126e73; font-size: 1.35rem; }
+  .selected-topic { margin: 0 0 24px; color: #126e73; }
+  .form-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .form-fields label { display: block; font-weight: 700; }
+  .required-hint { font-size: 0.85rem; font-weight: 400; }
+  .form-fields input, textarea { display: block; width: 100%; margin-top: 8px; padding: 12px 14px; border: 1px solid #9aaba9; border-radius: 6px; background: #fff; color: #16343d; font: inherit; font-weight: 400; box-sizing: border-box; }
+  textarea { resize: vertical; min-height: 140px; }
+  .message-field { grid-column: 1 / -1; }
+  .form-note { margin: 16px 0; font-size: 0.9rem; }
+  a { color: #126e73; text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+  .form-actions { display: flex; justify-content: space-between; gap: 16px; margin-top: 24px; flex-wrap: wrap; }
+  button { font: inherit; min-height: 48px; padding: 12px 22px; border-radius: 999px; cursor: pointer; }
+  .back-button { color: #126e73; border: 1px solid #126e73; background: transparent; }
+  .send-button { color: #16343d; border: 1px solid #e5b62f; background: #e5b62f; }
+  button:disabled { cursor: wait; opacity: 0.6; }
+  input:focus-visible, textarea:focus-visible, button:focus-visible, a:focus-visible { outline: 2px solid #168c91; outline-offset: 3px; }
+  .form-status { color: #b32626; margin: 16px 0 0; }
+  .form-status:empty { display: none; }
+  .contact-alternative { font-size: 0.9rem; margin: 24px 0 0; }
+  .form-success h3 { color: #126e73; font-size: 1.35rem; margin: 0 0 16px; }
+  .honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  [hidden] { display: none !important; }
+  @media (max-width: 600px) {
+    .form-section { padding: 32px 16px 48px; }
+    .form-card { padding: 24px 20px; }
+    .form-fields { grid-template-columns: minmax(0, 1fr); }
+    .form-heading { margin-bottom: 28px; }
+    .topic-option { padding: 14px; }
+  }
+</style>

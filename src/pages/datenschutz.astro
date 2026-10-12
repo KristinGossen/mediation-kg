@@ -1,6 +1,7 @@
 ---
 import LegalLayout from "../layouts/LegalLayout.astro";
 import { contact } from "../data/contact";
+const showContactForm = import.meta.env.PUBLIC_CONTACT_FORM_ENABLED === "true";
 ---
 
 <LegalLayout title="Datenschutzerklärung" description="Informationen zu Datenschutz, Hosting, Cookies und Ihren Rechten auf mediation-kg.com.">
@@ -34,10 +35,14 @@ import { contact } from "../data/contact";
   <h2>5. Schriftarten und Bilder</h2>
   <p>Schriftarten und Bilder werden von unserer eigenen Website geladen. Eine Verbindung zu Google Fonts oder anderen externen Schriftanbietern wird dafür nicht hergestellt.</p>
 
-  <h2>6. Kontakt per E-Mail oder Telefon</h2>
+  <h2>6. Kontakt per E-Mail{showContactForm ? ", Kontaktformular" : ""} oder Telefon</h2>
   <p>Wenn Sie uns kontaktieren, verarbeiten wir Ihre Kontaktdaten und die von Ihnen mitgeteilten Informationen zur Bearbeitung Ihrer Anfrage. Bei Anfragen zu einer Mediation ist die Rechtsgrundlage Art. 6 Abs. 1 Buchst. b DSGVO; bei sonstigen Anfragen Art. 6 Abs. 1 Buchst. f DSGVO mit dem berechtigten Interesse, Ihre Anfrage zu beantworten. Für die Übermittlung und Bereitstellung von E-Mails können die beteiligten E-Mail-Dienstleister Ihre Nachrichten und Verbindungsdaten verarbeiten.</p>
   <p>E-Mails an <a href={`mailto:${contact.email}`}>{contact.email}</a> werden über Cloudflare Email Routing an unser Gmail-Postfach bei Google weitergeleitet. Dabei verarbeiten Cloudflare und Google insbesondere Absender- und Empfängeradressen, Nachrichteninhalte, Anhänge und technische Zustellinformationen. Das Gmail-Postfach wird von Google Ireland Limited für Nutzerinnen und Nutzer im Europäischen Wirtschaftsraum angeboten. Google verarbeitet Daten auch außerhalb der EU, unter anderem in den USA. Informationen zu Verarbeitung, Speicherdauer und internationalen Übermittlungen finden Sie in <a href="https://policies.google.com/privacy?hl=de">Googles Datenschutzerklärung</a>; für die Weiterleitung gelten zusätzlich die oben verlinkten Cloudflare-Datenschutzhinweise.</p>
   <p>Kontaktangaben sind freiwillig. Ohne die für eine Antwort erforderlichen Angaben können wir Ihre Anfrage gegebenenfalls nicht bearbeiten. Bitte beschränken Sie eine erste Anfrage auf die zur Kontaktaufnahme notwendigen Angaben.</p>
+  {showContactForm && <>
+    <p>Im Kontaktformular erfassen wir das gewählte Thema, Ihren Namen, Ihre E-Mail-Adresse, gegebenenfalls Ihre Telefonnummer und Ihre Nachricht. Die Telefonnummer ist optional. Die Angaben werden über eine Cloudflare Pages Function verarbeitet und als E-Mail an unser Postfach übermittelt. Eine zusätzliche Speicherung der Formularinhalte in einer Website-Datenbank erfolgt nicht.</p>
+    <p>Zum Schutz vor automatisierten Spam-Anfragen verwenden wir Cloudflare Turnstile. Der Spamschutz wird beim Öffnen des zweiten Formularschritts geladen. Dabei werden technische Browser-, Geräte- und Verbindungsdaten an Cloudflare übermittelt und auf unserem Server geprüft. Zweck ist der Schutz des Formulars vor Missbrauch; Rechtsgrundlage ist Art. 6 Abs. 1 Buchst. f DSGVO. Informationen stellt Cloudflare in den <a href="https://www.cloudflare.com/turnstile-privacy-policy/">Datenschutzhinweisen zu Turnstile</a> bereit. Die Hinweise zu Cloudflare und internationalen Datenübermittlungen unter Abschnitt 2 gelten auch hierfür.</p>
+  </>}
 
   <h2>7. Speicherdauer</h2>
   <p>Für Kontaktanfragen richtet sich die Aufbewahrung nach der Dauer der Bearbeitung und etwaigen anschließenden Vertragsbeziehungen. Daten werden gelöscht, sobald sie für diese Zwecke nicht mehr erforderlich sind, sofern keine gesetzlichen Aufbewahrungspflichten oder die Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen entgegenstehen. Für technische Daten beim Hosting richten sich die Speicherfristen nach der Art der Daten und den jeweiligen Betriebs- und Sicherheitszwecken; weitere Informationen stellt Cloudflare in den oben verlinkten Datenschutzhinweisen bereit.</p>
@@ -48,5 +53,5 @@ import { contact } from "../data/contact";
   <p>Sie können sich außerdem bei einer Datenschutzaufsichtsbehörde beschweren, insbesondere an Ihrem Aufenthaltsort, Arbeitsplatz oder am Ort des vermuteten Verstoßes. Für Nordrhein-Westfalen ist dies die <a href="https://www.ldi.nrw.de/kontakt/ihre-beschwerde">Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen</a>.</p>
   <p>Auf dieser Website findet keine automatisierte Entscheidungsfindung einschließlich Profiling statt.</p>
 
-  <p>Stand: 10. Oktober 2026</p>
+  <p>Stand: {showContactForm ? "12. Oktober 2026" : "10. Oktober 2026"}</p>
 </LegalLayout>
