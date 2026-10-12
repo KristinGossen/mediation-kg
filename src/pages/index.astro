@@ -65,7 +65,12 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
       <section class="hero">
         <div class="hero-content">
           <p class="hero-intro">Faire Konfliktlösung, für jeden der bereit ist,<br />Stress zu bewältigen und<br />seine Lebensqualität zu steigern.</p>
-          <p class="eyebrow hero-principles">VERTRAULICH · EIGENVERANTWORTLICH · UNPARTEIISCH · AUSSERGERICHTLICH</p>
+          <p class="eyebrow hero-principles">
+            <span>VERTRAULICH</span>
+            <span>EIGENVERANTWORTLICH</span>
+            <span>UNPARTEIISCH</span>
+            <span>AUSSERGERICHTLICH</span>
+          </p>
 
           <p class="satisfaction-statement">Zufriedenheit ist ein Verdienst.</p>
           <div class="mediation-layout">
@@ -413,6 +418,10 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
 }
 
 .hero-principles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 24px;
   text-align: center;
 }
 
