@@ -20,6 +20,8 @@ import Illustration from "../components/Illustration.astro";
       <a class="back-link" href="/#wirtschaftsmediation">← Zur Startseite</a>
     </header>
     <main>
+      <div class="business-introduction">
+      <div class="business-content">
       <h1>Wirtschaftsmediation</h1>
       <Illustration
         class="team-image"
@@ -35,6 +37,10 @@ import Illustration from "../components/Illustration.astro";
           Für Konflikte zwischen Mitarbeitenden, Teams oder Führungskräften –
           professionell, strukturiert und auf Wunsch dokumentiert.
         </p>
+      </div>
+      </div>
+      </div>
+      <div class="satisfaction-section">
         <p class="satisfaction-text">
           <span class="satisfaction-highlight">Zufriedenheit ist ein Verdienst</span><br />
           - ein unabdingliches Leistungspotenzial.<br />
@@ -42,6 +48,8 @@ import Illustration from "../components/Illustration.astro";
           <span class="satisfaction-highlight">- sie ist der Treibstoff für Hochleistung.</span>
         </p>
       </div>
+      <div class="business-process">
+      <div class="business-content">
       <div class="mediation-stages">
         <section class="mediation-stage" aria-labelledby="understanding-heading">
           <h2 id="understanding-heading">Wie sieht die Verständigung aus?</h2>
@@ -75,6 +83,8 @@ import Illustration from "../components/Illustration.astro";
       </div>
       <div class="closing-contact">
         <a class="consultation" href="tel:+4915161235537">Unverbindliches Erstgespräch</a>
+      </div>
+      </div>
       </div>
     </main>
     <SiteFooter />
@@ -125,10 +135,27 @@ import Illustration from "../components/Illustration.astro";
     color: #168c91;
   }
 
-  main {
-    max-width: 1376px;
+  .business-content {
+    max-width: 1328px;
     margin: 0 auto;
-    padding: 40px 24px 72px;
+  }
+
+  .business-introduction {
+    display: flow-root;
+    padding: 40px 24px 28px;
+  }
+
+  .business-introduction .description > p:last-child {
+    margin-bottom: 0;
+  }
+
+  .satisfaction-section {
+    padding: 32px 24px 28px;
+    background: #f7f6f2;
+  }
+
+  .business-process {
+    padding: 28px 24px 72px;
   }
 
   h1 {
@@ -171,7 +198,8 @@ import Illustration from "../components/Illustration.astro";
   }
 
   .satisfaction-text {
-    margin: 60px 0 0;
+    max-width: 760px;
+    margin: 0 auto;
     text-align: center;
     font-size: 1.2rem;
     line-height: 1.6;
@@ -183,7 +211,7 @@ import Illustration from "../components/Illustration.astro";
 
   .mediation-stages {
     max-width: 760px;
-    margin: 56px auto 0;
+    margin: 0 auto;
   }
 
   .mediation-stage {
