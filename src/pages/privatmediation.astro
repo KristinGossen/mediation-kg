@@ -111,6 +111,10 @@ const privateImages = await Promise.all(
           </p>
         </section>
       </div>
+      </div>
+      </div>
+      <div class="private-gallery-section">
+      <div class="private-content">
       <div class="private-gallery" role="group" aria-label="Vom Konflikt über das Gespräch zur gemeinsamen Lösung">
         {privateImages.map(({ image, alt }) => (
           <Illustration
@@ -204,8 +208,13 @@ const privateImages = await Promise.all(
 
   .private-process {
     display: flow-root;
-    padding: 0 24px 72px;
+    padding: 0 24px;
     background: #f7f6f2;
+  }
+
+  .private-gallery-section {
+    padding: 40px 24px 72px;
+    background: #eee3d1;
   }
 
   h1 {
@@ -229,7 +238,7 @@ const privateImages = await Promise.all(
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 20px;
     align-items: start;
-    margin-top: 40px;
+    margin-top: 0;
   }
 
   .description {
