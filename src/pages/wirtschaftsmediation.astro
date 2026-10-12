@@ -37,10 +37,10 @@ import Illustration from "../components/Illustration.astro";
         </p>
         <a class="consultation" href="tel:+4915161235537">Unverbindliches Erstgespräch</a>
         <p class="satisfaction-text">
-          Zufriedenheit ist ein Verdienst<br />
+          <span class="satisfaction-highlight">Zufriedenheit ist ein Verdienst</span><br />
           - ein unabdingliches Leistungspotenzial.<br />
-          Sie setzt enorme Energien und Motivationen frei, die künstlich kaum erzeugt werden können<br />
-          - sie ist der Treibstoff für Hochleistung.
+          - sie setzt enorme Energien und Motivationen frei, die künstlich kaum erzeugt werden können<br />
+          <span class="satisfaction-highlight">- sie ist der Treibstoff für Hochleistung.</span>
         </p>
       </div>
       <div class="mediation-stages">
@@ -66,7 +66,7 @@ import Illustration from "../components/Illustration.astro";
         <section class="mediation-stage" aria-labelledby="conclusion-heading">
           <h2 id="conclusion-heading">Welches Fazit resultiert aus der Mediation?</h2>
           <ul>
-            <li>Forderungen erfasst</li>
+            <li>Ansprüche erfasst</li>
             <li>Prekäre Situation erkannt</li>
             <li>Effektive gemeinsame Lösungen</li>
             <li>Reflektierte Selbstwahrnehmung</li>
@@ -86,7 +86,7 @@ import Illustration from "../components/Illustration.astro";
 
   :global(body) {
     margin: 0;
-    background: #f7f6f2;
+    background: #eee3d1;
     color: #16343d;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.6;
@@ -163,10 +163,14 @@ import Illustration from "../components/Illustration.astro";
   }
 
   .satisfaction-text {
-    margin: 30px 0 0;
+    margin: 60px 0 0;
     text-align: center;
     font-size: 1.2rem;
     line-height: 1.6;
+  }
+
+  .satisfaction-highlight {
+    color: #b32626;
   }
 
   .mediation-stages {
