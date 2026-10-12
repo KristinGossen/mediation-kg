@@ -42,9 +42,9 @@ import Illustration from "../components/Illustration.astro";
       </div>
       <div class="satisfaction-section">
         <p class="satisfaction-text">
-          <span class="satisfaction-highlight">Zufriedenheit ist ein Verdienst</span><br />
+          <span class="satisfaction-highlight">Zufriedenheit ist ein Verdienst</span>
           - ein unabdingliches Leistungspotenzial.<br />
-          - sie setzt enorme Energien und Motivationen frei,<br />die künstlich kaum erzeugt werden können<br />
+          - sie setzt enorme Energien und Motivationen frei,<br />die künstlich kaum erzeugt werden können
           <span class="satisfaction-highlight">- sie ist der Treibstoff für Hochleistung.</span>
         </p>
       </div>
@@ -206,8 +206,17 @@ import Illustration from "../components/Illustration.astro";
   }
 
   .satisfaction-highlight {
+    display: block;
     color: #b32626;
     font-weight: 700;
+  }
+
+  .satisfaction-highlight:first-child {
+    margin-bottom: 12px;
+  }
+
+  .satisfaction-highlight:last-child {
+    margin-top: 12px;
   }
 
   .mediation-stages {
