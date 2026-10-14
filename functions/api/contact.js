@@ -66,6 +66,7 @@ export async function onRequest({ request, env }) {
   const fields = validated(input);
   if (!fields) return reply(422, { success: false, message: "Bitte überprüfen Sie das Thema, Ihren Namen, Ihre E-Mail-Adresse und Ihre Nachricht." });
 
+  let stage = "turnstile";
   try {
     const verification = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
       method: "POST",
@@ -73,12 +74,16 @@ export async function onRequest({ request, env }) {
       body: JSON.stringify({ secret: env.TURNSTILE_SECRET_KEY, response: fields.token, remoteip: request.headers.get("CF-Connecting-IP") || undefined }),
       signal: AbortSignal.timeout(10000),
     });
-    if (!verification.ok) throw new Error("verification_unavailable");
+    if (!verification.ok) {
+      console.error("contact_verification_http_failure", verification.status);
+      throw new Error("verification_unavailable");
+    }
     const challenge = await verification.json();
     if (!challenge.success || challenge.hostname !== url.hostname || challenge.action !== "contact") {
       return reply(422, { success: false, message: "Bitte bestätigen Sie den Spamschutz erneut und senden Sie Ihre Anfrage noch einmal." });
     }
 
+    stage = "delivery";
     const recipient = env.CONTACT_RECIPIENT.trim();
     const mail = {
       from: env.CONTACT_SENDER || "info@mediation-kg.com",
@@ -113,7 +118,10 @@ export async function onRequest({ request, env }) {
       return reply(delivery.status === 429 ? 429 : 502, { success: false, message: "Ihre Nachricht konnte nicht übermittelt werden. Bitte versuchen Sie es später erneut oder schreiben Sie uns per E-Mail." });
     }
     return reply(200, { success: true });
-  } catch {
+  } catch (error) {
+    // Log only stage and error class; never keys, addresses, messages or provider bodies.
+    const errorClass = ["Error", "TypeError", "ReferenceError", "SyntaxError", "AbortError", "TimeoutError"].includes(error?.name) ? error.name : "Error";
+    console.error("contact_backend_failure", stage, errorClass);
     return reply(502, { success: false, message: "Die Verbindung zum Versand wurde unterbrochen. Bitte schreiben Sie uns direkt per E-Mail." });
   }
 }

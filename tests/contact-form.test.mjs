@@ -88,12 +88,16 @@ test("queued mail is accepted; bounces, suppression and provider failures never 
 });
 
 test("network failures never expose credentials or visitor messages", async (t) => {
+  const logs = [];
+  t.mock.method(console, "error", (...args) => logs.push(args));
   t.mock.method(globalThis, "fetch", async () => { throw new Error("test-secret visitor@example.org"); });
   const response = await onRequest({ request: request(), env });
   assert.equal(response.status, 502);
   const body = await response.text();
   assert.ok(!body.includes("test-secret"));
   assert.ok(!body.includes(valid.email));
+  assert.ok(!JSON.stringify(logs).includes("test-secret"));
+  assert.ok(!JSON.stringify(logs).includes(valid.email));
 });
 
 test("free private service works without an API token and keeps recipients fixed", async (t) => {
