@@ -3,6 +3,8 @@ import SiteFooter from "../components/SiteFooter.astro";
 import ContactStrip from "../components/ContactStrip.astro";
 import Illustration from "../components/Illustration.astro";
 import ConfluenceStrip from "../components/ConfluenceStrip.astro";
+import { Image } from "astro:assets";
+import mountainsPhoto from "../assets/berge-see.jpeg";
 const navItems = [
   { label: "Privatmediation", href: "/privatmediation/" },
   { label: "Wirtschaftsmediation", href: "/wirtschaftsmediation/" },
@@ -66,6 +68,17 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
         <div class="hero-introduction">
         <div class="hero-content">
           <p class="hero-intro">Faire Konfliktlösung, für jeden der bereit ist,<br />Stress zu bewältigen und<br />seine Lebensqualität zu steigern.</p>
+          <Image
+            class="hero-photo"
+            src={mountainsPhoto}
+            alt="See vor einer Berglandschaft bei Sonnenuntergang."
+            width={1920}
+            widths={[480, 960, 1920]}
+            sizes="(max-width: 1142px) 84vw, 960px"
+            format="webp"
+            loading="eager"
+            decoding="async"
+          />
           <p class="eyebrow hero-principles">
             <span>VERTRAULICH</span>
             <span>EIGENVERANTWORTLICH</span>
@@ -448,6 +461,14 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
   font-size: clamp(2rem, 3.2vw, 2.65rem);
   font-weight: 400;
   line-height: 1.65;
+}
+
+.hero-photo {
+  display: block;
+  width: 100%;
+  max-width: 960px;
+  height: auto;
+  margin: 32px auto 36px;
 }
 
 .eyebrow {
