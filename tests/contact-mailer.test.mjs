@@ -41,13 +41,19 @@ test("mailer rejects altered sender, header injection and excessive content with
   assert.equal(count, 0);
 });
 
-test("unverified recipients, provider failure or missing binding never report success or leak data", async () => {
+test("unverified recipients, provider failure or missing binding never report success or leak data", async (t) => {
+  const logs = [];
+  t.mock.method(console, "error", (...args) => logs.push(args));
   assert.equal((await worker.fetch(request(), {})).status, 503);
   for (const code of ["E_RECIPIENT_NOT_ALLOWED", "E_DELIVERY_FAILED", "E_RATE_LIMIT_EXCEEDED"]) {
     const response = await worker.fetch(request(), { MAIL: { async send() { throw Object.assign(new Error(mail.to), { code }); } } });
     assert.equal(response.status, code === "E_RATE_LIMIT_EXCEEDED" ? 429 : 502);
     assert.deepEqual(await response.json(), { success: false });
   }
+  const diagnostics = JSON.stringify(logs);
+  assert.ok(!diagnostics.includes(mail.to));
+  assert.ok(!diagnostics.includes(mail.reply_to));
+  assert.ok(!diagnostics.includes(mail.text));
 });
 
 test("deployment exposes no worker or preview URL and restricts sending to verified destinations", async () => {

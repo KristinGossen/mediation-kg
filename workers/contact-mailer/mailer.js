@@ -66,6 +66,18 @@ export function createMailer(EmailMessage) {
         await env.MAIL.send(new EmailMessage(sender, mail.to, rawMessage(mail)));
         return reply(200, true);
       } catch (error) {
+        const message = typeof error?.message === "string" ? error.message : typeof error === "string" ? error : "";
+        const code = ["E_RECIPIENT_NOT_ALLOWED", "E_SENDER_NOT_VERIFIED", "E_SENDER_DOMAIN_NOT_AVAILABLE", "E_VALIDATION_ERROR", "E_FIELD_MISSING", "E_DELIVERY_FAILED", "E_RATE_LIMIT_EXCEEDED", "E_DAILY_LIMIT_EXCEEDED", "E_INTERNAL_SERVER_ERROR", "E_CONTENT_TOO_LARGE"].includes(error?.code) ? error.code : "unclassified";
+        // Diagnostic categories only: provider text may contain private addresses.
+        console.error("contact_mailer_failure", {
+          code,
+          recipient: /destination.*not.*verif|recipient.*not.*verif|not.*allowed|unverified.*destination|not.*verified.*address/iu.test(message),
+          sender: /sender|sending.*domain|from.*domain|not.*enabled|not.*onboard/iu.test(message),
+          format: /mime|header|rfc|message.*format|invalid.*message|malformed/iu.test(message),
+          limit: /limit|quota|rate|too.*many/iu.test(message),
+          rejected: /spam|blocked|suppress|reject/iu.test(message),
+          runtime: /not defined|not a function|not supported/iu.test(message),
+        });
         return reply(error?.code === "E_RATE_LIMIT_EXCEEDED" ? 429 : 502, false);
       }
     },
