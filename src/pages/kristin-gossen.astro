@@ -169,6 +169,12 @@ import ContactStrip from "../components/ContactStrip.astro";
     background: #e5b62f;
   }
   :global(a:focus-visible) { outline: 2px solid #168c91; outline-offset: 5px; }
+  @media (min-width: 701px) {
+    .career {
+      grid-template-columns: minmax(0, max-content) 5ch;
+      column-gap: 16px;
+    }
+  }
   @media (max-width: 700px) {
     .profile-grid {
       grid-template-columns: minmax(0, 1fr);
