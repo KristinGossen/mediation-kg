@@ -77,7 +77,6 @@ const privateImages = await Promise.all(
             und danken Ihnen für Ihr Vertrauen.
           </p>
         </div>
-        <a class="consultation" href="/kontakt/#kontaktformular">Unverbindliches Erstgespräch</a>
       </div>
       </div>
       </div>
@@ -125,6 +124,9 @@ const privateImages = await Promise.all(
             loading="lazy"
           />
         ))}
+      </div>
+      <div class="closing-contact">
+        <a class="consultation" href="/kontakt/#kontaktformular">Unverbindliches Erstgespräch</a>
       </div>
       </div>
       </div>
@@ -263,15 +265,16 @@ const privateImages = await Promise.all(
 
   .consultation {
     display: inline-block;
-    margin-top: 16px;
+    margin-top: 0;
     padding: 14px 24px;
     border: 1px solid #e5b62f;
     border-radius: 999px;
     background: #e5b62f;
   }
 
-  .private-guidance .consultation {
+  .closing-contact {
     margin-top: 52px;
+    text-align: center;
   }
 
   .consultation-text {
