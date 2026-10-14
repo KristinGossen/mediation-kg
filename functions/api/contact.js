@@ -74,11 +74,20 @@ export async function onRequest({ request, env }) {
       body: JSON.stringify({ secret: env.TURNSTILE_SECRET_KEY, response: fields.token, remoteip: request.headers.get("CF-Connecting-IP") || undefined }),
       signal: AbortSignal.timeout(10000),
     });
+    const challenge = await verification.json();
     if (!verification.ok) {
+      const codes = Array.isArray(challenge["error-codes"]) ? challenge["error-codes"] : [];
+      if (verification.status === 400 && challenge.success === false
+        && codes.some(code => ["invalid-input-response", "missing-input-response", "timeout-or-duplicate"].includes(code))) {
+        return reply(422, { success: false, message: "Bitte bestätigen Sie den Spamschutz erneut und senden Sie Ihre Anfrage noch einmal." });
+      }
+      if (codes.some(code => ["invalid-input-secret", "missing-input-secret"].includes(code))) {
+        console.error("contact_verification_configuration_failure");
+        return reply(503, { success: false, message: "Das Formular kann gerade keine Nachrichten senden. Bitte schreiben Sie uns direkt per E-Mail." });
+      }
       console.error("contact_verification_http_failure", verification.status);
       throw new Error("verification_unavailable");
     }
-    const challenge = await verification.json();
     if (!challenge.success || challenge.hostname !== url.hostname || challenge.action !== "contact") {
       return reply(422, { success: false, message: "Bitte bestätigen Sie den Spamschutz erneut und senden Sie Ihre Anfrage noch einmal." });
     }

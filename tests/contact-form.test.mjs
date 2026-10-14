@@ -135,3 +135,20 @@ test("private mailer failures and spam rejection never fall back to paid sending
   assert.equal((await onRequest({ request: request(), env: freeEnv })).status, 422);
   assert.equal(calls, 2);
 });
+
+test("Turnstile HTTP 400 rejects invalid tokens normally and identifies configuration failures safely", async (t) => {
+  const logs = [];
+  let code = "invalid-input-response";
+  t.mock.method(console, "error", (...args) => logs.push(args));
+  t.mock.method(globalThis, "fetch", async url => {
+    assert.ok(String(url).includes("siteverify"));
+    return Response.json({ success: false, "error-codes": [code] }, { status: 400 });
+  });
+  assert.equal((await onRequest({ request: request(), env })).status, 422);
+  assert.equal(logs.length, 0);
+  code = "invalid-input-secret";
+  const response = await onRequest({ request: request(), env });
+  assert.equal(response.status, 503);
+  assert.ok(!(await response.text()).includes(env.TURNSTILE_SECRET_KEY));
+  assert.deepEqual(logs, [["contact_verification_configuration_failure"]]);
+});
