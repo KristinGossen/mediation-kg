@@ -6,7 +6,7 @@ const env = {
   CF_ACCOUNT_ID: "account-id",
   CF_EMAIL_API_TOKEN: "test-secret",
   CONTACT_RECIPIENT: "owner@example.org",
-  TURNSTILE_SITE_KEY: "test-site-key",
+  TURNSTILE_SITE_KEY: "1x00000000000000000000AA",
   TURNSTILE_SECRET_KEY: "captcha-secret",
 };
 const valid = { topic: "Privatmediation", name: "Testperson", email: "visitor@example.org", phone: "", message: "Ich möchte ein Erstgespräch vereinbaren.", token: "test-token", website: "" };
@@ -18,7 +18,7 @@ const request = (data = valid, overrides = {}) => new Request("https://mediation
 
 test("configuration is public only as availability and site key", async () => {
   const response = await onRequest({ request: new Request("https://mediation-kg.com/api/contact"), env });
-  assert.deepEqual(await response.json(), { available: true, siteKey: "test-site-key" });
+  assert.deepEqual(await response.json(), { available: true, siteKey: env.TURNSTILE_SITE_KEY });
   assert.equal(response.headers.get("Cache-Control"), "no-store");
   const unavailable = await onRequest({ request: new Request("https://mediation-kg.com/api/contact"), env: {} });
   assert.deepEqual(await unavailable.json(), { available: false, siteKey: null });
@@ -151,4 +151,11 @@ test("Turnstile HTTP 400 rejects invalid tokens normally and identifies configur
   assert.equal(response.status, 503);
   assert.ok(!(await response.text()).includes(env.TURNSTILE_SECRET_KEY));
   assert.deepEqual(logs, [["contact_verification_configuration_failure"]]);
+});
+
+test("a secret accidentally stored as the public key is never exposed and cannot enable sending", async () => {
+  const wrongEnv = { ...env, TURNSTILE_SITE_KEY: "0x" + "A".repeat(33) };
+  const response = await onRequest({ request: new Request("https://mediation-kg.com/api/contact"), env: wrongEnv });
+  assert.deepEqual(await response.json(), { available: false, siteKey: null });
+  assert.equal((await onRequest({ request: request(), env: wrongEnv })).status, 503);
 });

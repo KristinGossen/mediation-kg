@@ -1,6 +1,8 @@
 import { contactTopics } from "../../src/data/contact-form.js";
 
 const emailPattern = /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/u;
+// Public widget keys are short. Never expose a mistakenly pasted secret key.
+const siteKeyPattern = /^(?:0x[A-Za-z0-9_-]{20,30}|[1-3]x[A-Za-z0-9_-]{22})$/u;
 const requiredSettings = ["CONTACT_RECIPIENT", "TURNSTILE_SITE_KEY", "TURNSTILE_SECRET_KEY"];
 
 function reply(status, payload) {
@@ -13,6 +15,7 @@ function reply(status, payload) {
 function configured(env) {
   return requiredSettings.every((key) => typeof env[key] === "string" && env[key].trim())
     && emailPattern.test(env.CONTACT_RECIPIENT)
+    && siteKeyPattern.test(env.TURNSTILE_SITE_KEY)
     && (typeof env.CONTACT_MAILER?.fetch === "function"
       || (typeof env.CF_ACCOUNT_ID === "string" && env.CF_ACCOUNT_ID.trim()
         && typeof env.CF_EMAIL_API_TOKEN === "string" && env.CF_EMAIL_API_TOKEN.trim()));
