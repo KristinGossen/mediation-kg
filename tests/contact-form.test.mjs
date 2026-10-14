@@ -95,3 +95,39 @@ test("network failures never expose credentials or visitor messages", async (t) 
   assert.ok(!body.includes("test-secret"));
   assert.ok(!body.includes(valid.email));
 });
+
+test("free private service works without an API token and keeps recipients fixed", async (t) => {
+  let mailed;
+  const freeEnv = {
+    CONTACT_RECIPIENT: env.CONTACT_RECIPIENT,
+    TURNSTILE_SITE_KEY: env.TURNSTILE_SITE_KEY,
+    TURNSTILE_SECRET_KEY: env.TURNSTILE_SECRET_KEY,
+    CONTACT_MAILER: { async fetch(request) { mailed = await request.json(); return Response.json({ success: true }); } },
+  };
+  t.mock.method(globalThis, "fetch", async (url) => {
+    assert.ok(String(url).includes("siteverify"));
+    return Response.json({ success: true, hostname: "mediation-kg.com", action: "contact" });
+  });
+  assert.deepEqual(await (await onRequest({ request: new Request("https://mediation-kg.com/api/contact"), env: freeEnv })).json(), { available: true, siteKey: env.TURNSTILE_SITE_KEY });
+  assert.equal((await onRequest({ request: request({ ...valid, to: "attacker@example.org" }), env: freeEnv })).status, 200);
+  assert.equal(mailed.to, env.CONTACT_RECIPIENT);
+  assert.equal(mailed.reply_to, valid.email);
+  assert.equal((await onRequest({ request: request(), env: { ...freeEnv, CONTACT_MAILER: undefined } })).status, 503);
+});
+
+test("private mailer failures and spam rejection never fall back to paid sending", async (t) => {
+  let challenge = { success: true, hostname: "mediation-kg.com", action: "contact" };
+  let status = 502;
+  let calls = 0;
+  const freeEnv = { ...env, CONTACT_MAILER: { async fetch() { calls++; return Response.json({ success: false }, { status }); } } };
+  t.mock.method(globalThis, "fetch", async (url) => {
+    assert.ok(String(url).includes("siteverify"));
+    return Response.json(challenge);
+  });
+  assert.equal((await onRequest({ request: request(), env: freeEnv })).status, 502);
+  status = 429;
+  assert.equal((await onRequest({ request: request(), env: freeEnv })).status, 429);
+  challenge = { success: false };
+  assert.equal((await onRequest({ request: request(), env: freeEnv })).status, 422);
+  assert.equal(calls, 2);
+});

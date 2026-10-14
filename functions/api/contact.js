@@ -1,7 +1,7 @@
 import { contactTopics } from "../../src/data/contact-form.js";
 
 const emailPattern = /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/u;
-const requiredSettings = ["CF_ACCOUNT_ID", "CF_EMAIL_API_TOKEN", "CONTACT_RECIPIENT", "TURNSTILE_SITE_KEY", "TURNSTILE_SECRET_KEY"];
+const requiredSettings = ["CONTACT_RECIPIENT", "TURNSTILE_SITE_KEY", "TURNSTILE_SECRET_KEY"];
 
 function reply(status, payload) {
   return Response.json(payload, {
@@ -12,7 +12,10 @@ function reply(status, payload) {
 
 function configured(env) {
   return requiredSettings.every((key) => typeof env[key] === "string" && env[key].trim())
-    && emailPattern.test(env.CONTACT_RECIPIENT);
+    && emailPattern.test(env.CONTACT_RECIPIENT)
+    && (typeof env.CONTACT_MAILER?.fetch === "function"
+      || (typeof env.CF_ACCOUNT_ID === "string" && env.CF_ACCOUNT_ID.trim()
+        && typeof env.CF_EMAIL_API_TOKEN === "string" && env.CF_EMAIL_API_TOKEN.trim()));
 }
 
 async function readBody(request) {
@@ -77,16 +80,31 @@ export async function onRequest({ request, env }) {
     }
 
     const recipient = env.CONTACT_RECIPIENT.trim();
+    const mail = {
+      from: env.CONTACT_SENDER || "info@mediation-kg.com",
+      to: recipient,
+      reply_to: fields.email,
+      subject: `Kontaktformular Mediation KG: ${fields.topic}`,
+      text: `Thema: ${fields.topic}\nName: ${fields.name}\nE-Mail: ${fields.email}\nTelefon: ${fields.phone || "Nicht angegeben"}\n\nNachricht:\n${fields.message}`,
+    };
+    // A private Worker uses Email Routing's free sending to verified destinations.
+    if (typeof env.CONTACT_MAILER?.fetch === "function") {
+      const delivery = await env.CONTACT_MAILER.fetch(new Request("https://contact-mailer.internal/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(mail),
+        signal: AbortSignal.timeout(15000),
+      }));
+      const result = await delivery.json();
+      if (!delivery.ok || result.success !== true) {
+        return reply(delivery.status === 429 ? 429 : 502, { success: false, message: "Ihre Nachricht konnte nicht übermittelt werden. Bitte versuchen Sie es später erneut oder schreiben Sie uns per E-Mail." });
+      }
+      return reply(200, { success: true });
+    }
     const delivery = await fetch(`https://api.cloudflare.com/client/v4/accounts/${encodeURIComponent(env.CF_ACCOUNT_ID)}/email/sending/send`, {
       method: "POST",
       headers: { "Authorization": `Bearer ${env.CF_EMAIL_API_TOKEN}`, "Content-Type": "application/json" },
-      body: JSON.stringify({
-        from: env.CONTACT_SENDER || "info@mediation-kg.com",
-        to: recipient,
-        reply_to: fields.email,
-        subject: `Kontaktformular Mediation KG: ${fields.topic}`,
-        text: `Thema: ${fields.topic}\nName: ${fields.name}\nE-Mail: ${fields.email}\nTelefon: ${fields.phone || "Nicht angegeben"}\n\nNachricht:\n${fields.message}`,
-      }),
+      body: JSON.stringify(mail),
       signal: AbortSignal.timeout(15000),
     });
     const result = await delivery.json();
