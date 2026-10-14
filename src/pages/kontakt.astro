@@ -30,6 +30,7 @@ const showContactForm = import.meta.env.PUBLIC_CONTACT_FORM_ENABLED === "true";
         ob Mediation für Ihre Situation der passende Weg ist.
       </p>
       </div>
+      {showContactForm && <ContactForm />}
       <div class="contact-section">
       <div class="contact-content">
       <div class="contact-grid">
@@ -50,7 +51,6 @@ const showContactForm = import.meta.env.PUBLIC_CONTACT_FORM_ENABLED === "true";
       </div>
       </div>
       </div>
-      {showContactForm && <ContactForm />}
       <div class="closing-section">
         <p class="closing">Ich nehme mir Zeit für Ihre Anliegen und freue mich auf Ihre Kontaktaufnahme.</p>
       </div>
