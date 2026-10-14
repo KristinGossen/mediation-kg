@@ -59,9 +59,14 @@ bei vorhandenem `CONTACT_MAILER` wird sie auch bei Fehlern niemals als Ersatz ge
    Vorschau veröffentlicht werden soll, dort eigene Testschlüssel verwenden und
    die Versand-Secrets nicht in öffentliche Git- oder Browserdaten übernehmen.
 
-Die Betreiberin hat den Cloudflare-Zugang, der Agent aktuell keine Cloudflare-
-Verwaltungsberechtigung. Token und Secret-Key direkt im Dashboard eintragen;
-nicht in Chat, Git oder Testprotokolle kopieren.
+Die Verbindung kann direkt im Cloudflare-Dashboard oder über die von der Betreiberin
+freigegebene Wrangler-Anmeldung eingerichtet werden. Für die automatische Zuordnung
+der Turnstile-Schlüssel ist zusätzlich die Turnstile-Berechtigung erforderlich.
+Zugangsdaten bleiben im Windows-Keyring beziehungsweise während API-Aufrufen im
+Prozessspeicher. Token und Secret-Key nicht in Chat, Git oder Testprotokolle kopieren.
+Der obere `Site key` gehört zur öffentlichen Widget-Einbindung, der untere
+`Secret key` zur serverseitigen Prüfung. Die Funktion verweigert die Konfiguration,
+wenn im öffentlichen Feld ein langer geheimer Schlüssel hinterlegt wurde.
 
 ## Prüfen
 
