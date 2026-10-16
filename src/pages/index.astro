@@ -105,7 +105,7 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
               </ul>
             </div>
             <div class="mediation-info">
-              <section class="mediation-faq" aria-label="Fragen zu den Kosten einer Mediation">
+              <section class="mediation-faq" aria-label="Häufige Fragen zur Mediation">
                 <details id="kosten-privatmediation">
                   <summary>Wie viel kostet eine Privatmediation?</summary>
                   <div class="faq-answer">
@@ -136,6 +136,20 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
                       empfehlenswert.
                     </p>
                     <p>Die Preise verstehen sich zzgl. Mwst.</p>
+                  </div>
+                </details>
+                <details id="gesetzliche-grundlage">
+                  <summary>Gibt es eine gesetzliche Grundlage?</summary>
+                  <div class="faq-answer">
+                    <p>
+                      Ja. Die gesetzliche Grundlage für Mediation in Deutschland
+                      ist das Mediationsgesetz (MediationsG).
+                    </p>
+                    <p>
+                      <a href="https://www.gesetze-im-internet.de/mediationsg/BJNR157710012.html">
+                        Mediationsgesetz auf „Gesetze im Internet“ lesen
+                      </a>
+                    </p>
                   </div>
                 </details>
               </section>
@@ -627,11 +641,13 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
   content: "−";
 }
 
-.mediation-faq summary:hover {
+.mediation-faq summary:hover,
+.faq-answer a:hover {
   color: #16343d;
 }
 
-.mediation-faq summary:focus-visible {
+.mediation-faq summary:focus-visible,
+.faq-answer a:focus-visible {
   outline: 2px solid #126e73;
   outline-offset: 4px;
 }
@@ -645,6 +661,12 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
 
 .faq-answer p {
   margin: 12px 0 0;
+}
+
+.faq-answer a {
+  color: #126e73;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .hero-text-highlight {
