@@ -508,6 +508,22 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
   letter-spacing: -0.025em;
 }
 
+@media (max-width: 800px) {
+  .conflict-consultation h1 {
+    font-size: clamp(3rem, 6vw, 5.4rem);
+    line-height: 1.02;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 4vw, 3.6rem);
+  }
+
+  .hero-resolution {
+    font-size: clamp(1rem, 5vw, 5.4rem);
+    white-space: nowrap;
+  }
+}
+
 .mediation-columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
