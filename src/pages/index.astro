@@ -122,7 +122,7 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
        <section class="services">
         <div class="section-intro">
           <p class="eyebrow">Ein gemeinsames Ziel</p>
-          <h2>Konflikte dort lösen,<br /> wo sie entstehen.</h2>
+          <h2>Konflikte dort lösen,<br /> <span class="conflict-location">wo sie entstehen.</span></h2>
         </div>
 
         <div class="service-grid">
@@ -518,7 +518,8 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
     font-size: clamp(2rem, 4vw, 3.6rem);
   }
 
-  .hero-resolution {
+  .hero-resolution,
+  .conflict-location {
     font-size: clamp(1rem, 5vw, 5.4rem);
     white-space: nowrap;
   }
