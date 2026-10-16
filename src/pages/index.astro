@@ -104,12 +104,52 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
                 <li>verschafft Klarheit und neue Sichtweisen</li>
               </ul>
             </div>
-            <p class="hero-text">
-              Gemeinsam arbeiten wir an einer Win-Win-Lösung. Realistisch,
-              zukunftsorientiert und <span class="hero-text-highlight">selbstbestimmend, ohne gerichtliche Urteile</span>.
-              Alltagstaugliche Vereinbarungen und nachhaltige Lösungen, um private
-              oder auch geschäftliche Beziehungen zu schützen.
-            </p>
+            <div class="mediation-info">
+              <section class="mediation-faq" aria-label="Fragen zu den Kosten einer Mediation">
+                <details id="kosten-privatmediation">
+                  <summary>Wie viel kostet eine Privatmediation?</summary>
+                  <div class="faq-answer">
+                    <p>
+                      Ab 2 Personen:<br />
+                      1. und 2. Stunde: € 95,00<br />
+                      Ab der 3. Stunde: € 75,00<br />
+                      Einheiten von 1,5 Stunden kosten € 130,00, jede weitere
+                      angefangene ½ Stunde € 40,00.
+                    </p>
+                    <p>
+                      Ein Stundenpaket ab 5 Stunden kann bei aufwendiger Problematik
+                      von Vorteil sein und individuell mit Ihnen geplant werden.
+                    </p>
+                  </div>
+                </details>
+                <details id="kosten-wirtschaftsmediation">
+                  <summary>Wie viel kostet eine Wirtschaftsmediation?</summary>
+                  <div class="faq-answer">
+                    <p>
+                      60 Minuten kosten durchschnittlich € 250,00.<br />
+                      Doppelstunden kosten € 390,00.
+                    </p>
+                    <p>
+                      Ausschlaggebend ist vor allem die Teamgröße. Je mehr Personen
+                      involviert und je komplizierter die Konstellation, desto mehr
+                      Stunden sind nötig. Bei mehr als 3 involvierten Personen sollte
+                      man direkt eine Doppelstunde vereinbaren.
+                    </p>
+                    <p>Nach der 3. Sitzung reduziert sich der Preis auf € 150,00.</p>
+                    <p>
+                      Ebenso sind Pakete von 5 Sitzungen für kompaktere
+                      Angelegenheiten sinnvoll.
+                    </p>
+                  </div>
+                </details>
+              </section>
+              <p class="hero-text">
+                Gemeinsam arbeiten wir an einer Win-Win-Lösung. Realistisch,
+                zukunftsorientiert und <span class="hero-text-highlight">selbstbestimmend, ohne gerichtliche Urteile</span>.
+                Alltagstaugliche Vereinbarungen und nachhaltige Lösungen, um private
+                oder auch geschäftliche Beziehungen zu schützen.
+              </p>
+            </div>
             </div>
             <p class="mediation-closing">
               <strong class="mediation-emphasis">fragt nicht nach einem Schuldigen</strong>
@@ -547,10 +587,68 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
 
 .hero-text {
   max-width: 760px;
+  margin: 0;
   text-align: center;
   color: #566164;
   font-size: 1rem;
   line-height: 1.7;
+}
+
+.mediation-faq {
+  margin-bottom: 28px;
+}
+
+.mediation-faq details + details {
+  margin-top: 16px;
+}
+
+.mediation-faq summary {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 4px 0;
+  color: #126e73;
+  font-size: 1rem;
+  line-height: 1.6;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.mediation-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.mediation-faq summary::after {
+  content: "+";
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.mediation-faq details[open] > summary::after {
+  content: "−";
+}
+
+.mediation-faq summary:hover {
+  color: #16343d;
+}
+
+.mediation-faq summary:focus-visible {
+  outline: 2px solid #126e73;
+  outline-offset: 4px;
+}
+
+.faq-answer {
+  padding: 4px 0 0;
+  color: #566164;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.faq-answer p {
+  margin: 12px 0 0;
 }
 
 .hero-text-highlight {
@@ -574,7 +672,7 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
     background: rgba(22, 52, 61, 0.22);
   }
 
-  .mediation-columns > .hero-text {
+  .mediation-columns > .mediation-info {
     margin-top: calc(1.4rem * 1.8 + 4px);
   }
 }
@@ -622,13 +720,13 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
     margin: -22px 0 28px;
   }
 
-  .hero-text {
+  .mediation-info {
     position: relative;
     grid-row: 3;
     padding-top: 28px;
   }
 
-  .hero-text::before {
+  .mediation-info::before {
     content: "";
     position: absolute;
     top: 0;
