@@ -227,12 +227,14 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
             </div>
             </div>
           </div>
-          <p class="hero-text">
-            Gemeinsam arbeiten wir an einer Win-Win-Lösung. Realistisch,
-            zukunftsorientiert und <span class="hero-text-highlight">selbstbestimmend, ohne gerichtliche Urteile</span>.
-            Alltagstaugliche Vereinbarungen und nachhaltige Lösungen, um private
-            oder auch geschäftliche Beziehungen zu schützen.
-          </p>
+          <div class="hero-text">
+            <p>Gemeinsam arbeiten wir an einer Win-Win-Lösung.</p>
+            <p>
+              Realistisch, zukunftsorientiert und <span class="hero-text-highlight">selbstbestimmend, ohne gerichtliche Urteile</span>.
+              Alltagstaugliche Vereinbarungen und nachhaltige Lösungen, um private
+              oder auch geschäftliche Beziehungen zu schützen.
+            </p>
+          </div>
         </div>
         </div>
 
@@ -670,6 +672,14 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
   color: #566164;
   font-size: 1rem;
   line-height: 1.7;
+}
+
+.hero-text p {
+  margin: 0;
+}
+
+.hero-text p + p {
+  margin-top: 16px;
 }
 
 .mediation-faq {
