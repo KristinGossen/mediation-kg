@@ -492,31 +492,20 @@ const portraitOutline = "M100 2 C120 44 156 80 198 100 C156 120 120 156 100 198 
   margin: 0;
   text-align: center;
   color: #263438;
-  font-size: clamp(3rem, 6vw, 5.4rem);
-  line-height: 1.02;
+  font-size: clamp(2.3rem, 4vw, 4rem);
+  line-height: 1.08;
   font-weight: 500;
   letter-spacing: -0.04em;
 }
 
 .hero-title {
-  font-size: clamp(2rem, 4vw, 3.6rem);
+  font-size: inherit;
   font-weight: 400;
 }
 
 .hero-resolution {
-  font-size: clamp(1rem, 5vw, 5.4rem);
+  font-size: inherit;
   letter-spacing: -0.025em;
-  white-space: nowrap;
-}
-
-@media (min-width: 801px) {
-  .hero-title {
-    font-size: clamp(1rem, 5vw, 5.4rem);
-  }
-
-  .hero-resolution {
-    font-size: clamp(2rem, 4vw, 3.6rem);
-  }
 }
 
 .mediation-columns {
