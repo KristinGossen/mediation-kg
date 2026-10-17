@@ -80,6 +80,28 @@ import Illustration from "../components/Illustration.astro";
             <li>Zielorientierte Maßnahmen umsetzen</li>
           </ul>
         </section>
+        <section class="mediation-stage mediation-process" aria-labelledby="process-heading">
+          <h2 id="process-heading">Wie läuft Mediation ab?</h2>
+          <p class="process-principles">Nach den 5 Phasen der Mediation:</p>
+          <ol class="mediation-phases">
+            <li>
+              1. Rahmenbedingungen, Ablauf und Regeln werden erläutert und die
+              Schweigepflicht nach außen wird erklärt.
+            </li>
+            <li>
+              2. Ansichten, Konflikte und Problematiken äußern. Der/die Mediator-in ist
+              parteilos und neutral und gibt jedem genügend Raum, seine eigene
+              Sichtweise darzustellen.
+            </li>
+            <li>
+              3. Aufdecken der Hintergründe: Interessen, Motive, Gefühle,
+              Bedürfnisse und Wünsche werden herausgearbeitet, um Ursachen von
+              Konflikten zu erkennen und auch Missverständnisse auszuräumen.
+            </li>
+            <li>4. Lösungsvorschläge und Lösungsentwicklung</li>
+            <li>5. Lösungsvereinbarung</li>
+          </ol>
+        </section>
       </div>
       <div class="closing-contact">
         <a class="consultation" href="/kontakt/#kontaktformular">Unverbindliches Erstgespräch</a>
@@ -240,6 +262,23 @@ import Illustration from "../components/Illustration.astro";
 
   .mediation-stage li + li {
     margin-top: 8px;
+  }
+
+  .process-principles {
+    margin: 24px 0 0;
+  }
+
+  .mediation-phases {
+    color: #168c91;
+    display: grid;
+    gap: 1lh;
+    margin: 1lh 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .mediation-phases li + li {
+    margin-top: 0;
   }
 
 </style>
